@@ -1,5 +1,6 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import Bar from "components/Bar";
+import useSortingVisualize from "hooks/useSortingVisualize";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "BUBBLE_SORT",
@@ -16,83 +17,54 @@ export type SortingTrace = {
   payload: number[];
 };
 
-type NumberProps = {
-  value: number;
-  order: number;
-};
-
 type SortingVisualizerProps = {
   type?: SortingAlgorithms;
   sourceNumbers: number[];
-  trace: SortingTrace[];
 };
 
 const MIN_HEIGHT = 400;
 const MAX_WIDTH = 800;
-const STEP_TIME_MS = 500;
 
-const SortingVisualizer: FC<SortingVisualizerProps> = ({
-  trace,
-  sourceNumbers,
-}) => {
+const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
   const [comparing, setComparing] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
-  const [numbers, setNumbers] = useState<NumberProps[]>([]);
-  const offsetTime = useRef(0);
+  const { tracer, setNumbers, numbers } = useSortingVisualize(sourceNumbers);
 
   console.log("render");
 
-  useEffect(() => {
-    setNumbers(
-      sourceNumbers.map((num, index) => ({
-        value: num,
-        order: index,
-      }))
-    );
-  }, [sourceNumbers]);
+  if (tracer == null) {
+    return null;
+  }
 
-  useEffect(() => {
-    trace.forEach((step) => {
-      const { type, payload } = step;
-
-      if (type === SortingState.COMPARE) {
-        setTimeout(() => {
-          setComparing(payload);
-        }, offsetTime.current++ * STEP_TIME_MS);
-
-        setTimeout(() => {
-          setComparing([]);
-        }, offsetTime.current++ * STEP_TIME_MS);
-
-        return;
-      }
-
-      if (type === SortingState.SWAP) {
-        setTimeout(() => {
-          const [numA, numB] = payload;
-          const res = [...numbers];
-          const a = res.find((num) => num.value === numA);
-          const b = res.find((num) => num.value === numB);
-          if (a && b) {
-            let tmp = a.order;
-            a.order = b.order;
-            b.order = tmp;
-          }
-          setNumbers(res);
-        }, offsetTime.current++ * STEP_TIME_MS);
-
-        return;
-      }
-
-      if (type === SortingState.SORTED) {
-        setTimeout(() => {
-          setSorted((sorted) => sorted.concat(payload));
-        }, offsetTime.current++ * STEP_TIME_MS);
-        return;
-      }
+  const handleStart = () => {
+    tracer.start(0, {
+      onCompare: (payload) => {
+        setComparing(payload);
+      },
+      onCompared: () => {
+        setComparing([]);
+      },
+      onSwap: (payload) => {
+        const [numA, numB] = payload;
+        const res = [...numbers];
+        const a = res.find((num) => num.value === numA);
+        const b = res.find((num) => num.value === numB);
+        if (a && b) {
+          let tmp = a.order;
+          a.order = b.order;
+          b.order = tmp;
+        }
+        setNumbers(res);
+      },
+      onSorted: (payload) => {
+        setSorted((sorted) => sorted.concat(payload));
+      },
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [trace]);
+  };
+
+  const handlePause = () => {
+    tracer.pause();
+  };
 
   return (
     <div className="p-4">
@@ -110,6 +82,8 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({
           />
         ))}
       </div>
+      <button onClick={handleStart}>Start</button>
+      <button onClick={handlePause}>Pause</button>
     </div>
   );
 };

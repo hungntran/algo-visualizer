@@ -1,24 +1,35 @@
-import { SortingState, SortingTrace } from "components/SortingVisualizer";
+import Tracer, { TraceState } from "services/Tracer";
 
-export default function bubbleSort(arr: number[]): SortingTrace[] {
-  const trace: SortingTrace[] = [];
+const bubbleSort = (arr: number[]): Tracer => {
+  const tracer = new Tracer();
+  const length = arr.length;
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = 0; j < arr.length - i - 1; j++) {
-      trace.push({ type: SortingState.COMPARE, payload: [arr[j], arr[j + 1]] });
+  for (let i = 0; i < length; i++) {
+    for (let j = 0; j < length - i - 1; j++) {
+      tracer.add({
+        type: TraceState.COMPARE,
+        payload: [arr[j], arr[j + 1]],
+      });
 
       if (arr[j] > arr[j + 1]) {
         let temp = arr[j];
         arr[j] = arr[j + 1];
         arr[j + 1] = temp;
-        trace.push({ type: SortingState.SWAP, payload: [arr[j], arr[j + 1]] });
+
+        tracer.add({
+          type: TraceState.SWAP,
+          payload: [arr[j], arr[j + 1]],
+        });
       }
     }
-    trace.push({
-      type: SortingState.SORTED,
-      payload: [arr[arr.length - i - 1]],
+
+    tracer.add({
+      type: TraceState.SORTED,
+      payload: [arr[length - i - 1]],
     });
   }
 
-  return trace;
-}
+  return tracer;
+};
+
+export default bubbleSort;
