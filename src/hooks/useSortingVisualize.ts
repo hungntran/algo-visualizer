@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Tracer from "services/Tracer";
 import bubbleSort from "algorithms/sorting/bubbleSort";
 
