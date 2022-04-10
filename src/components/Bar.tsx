@@ -18,7 +18,7 @@ const Bar: FC<{
         }
       )}
       style={{
-        left: 100 + 30 * order,
+        left: 30 * order,
         height: value * 10,
       }}
     >

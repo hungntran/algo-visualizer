@@ -18,11 +18,19 @@ const useSortingVisualize = (sourceNumbers: number[]) => {
         order: index,
       }))
     );
-
     setTracer(bubbleSort(sourceNumbers));
   }, [sourceNumbers]);
 
-  return { tracer, setTracer, numbers, setNumbers };
+  const resetNumbers = () => {
+    setNumbers(
+      sourceNumbers.map((num, index) => ({
+        value: num,
+        order: index,
+      }))
+    );
+  };
+
+  return { tracer, setTracer, numbers, setNumbers, resetNumbers };
 };
 
 export default useSortingVisualize;

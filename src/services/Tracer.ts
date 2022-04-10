@@ -9,7 +9,7 @@ type TraceType = {
   payload: number[];
 };
 
-const STEP_TIME_MS = 500;
+const STEP_TIME_MS = 300;
 
 class Tracer {
   private traces: TraceType[] = [];
@@ -17,41 +17,36 @@ class Tracer {
   private timeoutIds = new Set<NodeJS.Timeout>();
   private timestamp: number = 0;
 
-  public reset() {
-    this.timestamp = 0;
-    this.traces = [];
-    this.current = 0;
-    this.timeoutIds.clear();
-  }
-
   public add(trace: TraceType) {
     this.traces.push(trace);
   }
 
-  public start(
-    index: number,
-    {
-      onCompare,
-      onCompared,
-      onSwap,
-      onSorted,
-    }: {
-      onCompare: (payload: number[]) => void;
-      onCompared: () => void;
-      onSwap: (payload: number[]) => void;
-      onSorted: (payload: number[]) => void;
-    }
-  ) {
-    const traces = this.traces.slice(index);
+  public start({
+    onCompare,
+    onCompared,
+    onSwap,
+    onFinish,
+    onSorted,
+  }: {
+    onCompare: (payload: number[]) => void;
+    onCompared: () => void;
+    onSwap: (payload: number[]) => void;
+    onSorted: (payload: number[]) => void;
+    onFinish: () => void;
+  }) {
+    const traces = this.traces.slice(this.current);
+
     traces.forEach((trace) => {
       const { type, payload } = trace;
 
       if (type === TraceState.COMPARE) {
         const compareTimeout = setTimeout(() => {
           onCompare(payload);
+          this.current += 1;
           clearTimeout(compareTimeout);
           this.timeoutIds.delete(compareTimeout);
         }, this.timestamp++ * STEP_TIME_MS);
+
         this.timeoutIds.add(compareTimeout);
 
         const comparedTimeout = setTimeout(() => {
@@ -59,6 +54,7 @@ class Tracer {
           clearTimeout(comparedTimeout);
           this.timeoutIds.delete(comparedTimeout);
         }, this.timestamp++ * STEP_TIME_MS);
+
         this.timeoutIds.add(comparedTimeout);
 
         return;
@@ -67,6 +63,7 @@ class Tracer {
       if (type === TraceState.SWAP) {
         const swapTimeout = setTimeout(() => {
           onSwap(payload);
+          this.current += 1;
           clearTimeout(swapTimeout);
           this.timeoutIds.delete(swapTimeout);
         }, this.timestamp++ * STEP_TIME_MS);
@@ -78,6 +75,7 @@ class Tracer {
       if (type === TraceState.SORTED) {
         const sortedTimeout = setTimeout(() => {
           onSorted(payload);
+          this.current += 1;
           clearTimeout(sortedTimeout);
           this.timeoutIds.delete(sortedTimeout);
         }, this.timestamp++ * STEP_TIME_MS);
@@ -86,9 +84,24 @@ class Tracer {
         return;
       }
     });
+
+    setTimeout(() => {
+      onFinish();
+    }, this.timestamp++ * STEP_TIME_MS);
   }
 
   public pause() {
+    this.clearTimeout();
+    this.timestamp = 0;
+  }
+
+  public reset() {
+    this.clearTimeout();
+    this.timestamp = 0;
+    this.current = 0;
+  }
+
+  public clearTimeout() {
     this.timeoutIds.forEach((timeout) => {
       clearTimeout(timeout);
     });

@@ -1,6 +1,7 @@
-import React, { FC, useEffect, useState } from "react";
-import Bar from "components/Bar";
+import React, { FC, useState } from "react";
 import useSortingVisualize from "hooks/useSortingVisualize";
+import Button from "components/Button";
+import Bar from "components/Bar";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "BUBBLE_SORT",
@@ -12,11 +13,6 @@ export enum SortingState {
   SORTED = "SORTED",
 }
 
-export type SortingTrace = {
-  type: SortingState;
-  payload: number[];
-};
-
 type SortingVisualizerProps = {
   type?: SortingAlgorithms;
   sourceNumbers: number[];
@@ -25,10 +21,19 @@ type SortingVisualizerProps = {
 const MIN_HEIGHT = 400;
 const MAX_WIDTH = 800;
 
+enum Status {
+  NONE,
+  RUNNING,
+  PAUSED,
+  DONE,
+}
+
 const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
   const [comparing, setComparing] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
-  const { tracer, setNumbers, numbers } = useSortingVisualize(sourceNumbers);
+  const [status, setStatus] = useState<Status>(Status.NONE);
+  const { tracer, setNumbers, numbers, resetNumbers } =
+    useSortingVisualize(sourceNumbers);
 
   console.log("render");
 
@@ -37,7 +42,9 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
   }
 
   const handleStart = () => {
-    tracer.start(0, {
+    setStatus(Status.RUNNING);
+
+    tracer.start({
       onCompare: (payload) => {
         setComparing(payload);
       },
@@ -59,31 +66,59 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
       onSorted: (payload) => {
         setSorted((sorted) => sorted.concat(payload));
       },
+      onFinish: () => {
+        console.log("finished");
+        setStatus(Status.DONE);
+      },
     });
   };
 
   const handlePause = () => {
     tracer.pause();
+    setStatus(Status.PAUSED);
+  };
+
+  const handleReset = () => {
+    tracer.reset();
+    resetNumbers();
+    setComparing([]);
+    setSorted([]);
+    setStatus(Status.NONE);
   };
 
   return (
     <div className="p-4">
       <div
-        className="relative mx-auto bg-purple-100 border-2 border-purple-600 flex justify-center items-end rounded-md"
+        className="mx-auto bg-purple-100 border-2 border-purple-600 flex justify-center items-end rounded-md"
         style={{ height: MIN_HEIGHT, width: MAX_WIDTH }}
       >
-        {numbers.map(({ value, order }) => (
-          <Bar
-            key={value}
-            order={order}
-            value={value}
-            isComparing={comparing.includes(value)}
-            isSorted={sorted.includes(value)}
-          />
-        ))}
+        <div
+          className="relative self-stretch flex items-end"
+          style={{
+            width: numbers.length * 30,
+          }}
+        >
+          {numbers.map(({ value, order }) => (
+            <Bar
+              key={value}
+              order={order}
+              value={value}
+              isComparing={comparing.includes(value)}
+              isSorted={sorted.includes(value)}
+            />
+          ))}
+        </div>
       </div>
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handlePause}>Pause</button>
+      <div className="flex justify-center gap-x-2 mt-4">
+        {status === Status.RUNNING ? (
+          <Button onClick={handlePause} text="Pause" />
+        ) : (
+          <>
+            <Button onClick={handleStart} text="Start" />
+            <Button onClick={handleReset} text="Reset" isOutline />
+          </>
+        )}
+      </div>
     </div>
   );
 };
