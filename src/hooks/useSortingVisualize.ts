@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Tracer from "services/Tracer";
-import bubbleSort from "algorithms/sorting/bubbleSort";
+import bubbleSort from "algorithms/sorting/bubbleSort_test";
 
 type NumberProps = {
   value: number;
