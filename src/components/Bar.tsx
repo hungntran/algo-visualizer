@@ -6,15 +6,18 @@ const Bar: FC<{
   order: number;
   isComparing: boolean;
   isSorted: boolean;
-}> = ({ value, order, isComparing, isSorted }) => {
+  isSwapping: boolean;
+}> = ({ value, order, isComparing, isSorted, isSwapping }) => {
   return (
     <div
       className={classNames(
         "w-6 border-2 border-b-0 text-white text-sm font-semibold text-center rounded-t-md transition-all absolute",
         {
-          "bg-purple-400 border-purple-600": !isComparing && !isSorted,
-          "bg-yellow-400 border-yellow-600": isComparing,
-          "bg-green-400 border-green-600": isSorted,
+          "bg-primary-500 border-primary-800":
+            !isComparing && !isSorted && !isSwapping,
+          "bg-tertiary-400 border-tertiary-700": isSwapping,
+          "bg-tertiary-500 border-tertiary-800": isComparing,
+          "bg-secondary-400 border-secondary-700": isSorted,
         }
       )}
       style={{

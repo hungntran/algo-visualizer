@@ -9,7 +9,7 @@ type TraceType = {
   payload: number[];
 };
 
-const STEP_TIME_MS = 300;
+const STEP_TIME_MS = 500;
 
 class Tracer {
   private traces: TraceType[] = [];
@@ -23,13 +23,11 @@ class Tracer {
 
   public start({
     onCompare,
-    onCompared,
     onSwap,
     onFinish,
     onSorted,
   }: {
     onCompare: (payload: number[]) => void;
-    onCompared: () => void;
     onSwap: (payload: number[]) => void;
     onSorted: (payload: number[]) => void;
     onFinish: () => void;
@@ -48,14 +46,6 @@ class Tracer {
         }, this.timestamp++ * STEP_TIME_MS);
 
         this.timeoutIds.add(compareTimeout);
-
-        const comparedTimeout = setTimeout(() => {
-          onCompared();
-          clearTimeout(comparedTimeout);
-          this.timeoutIds.delete(comparedTimeout);
-        }, this.timestamp++ * STEP_TIME_MS);
-
-        this.timeoutIds.add(comparedTimeout);
 
         return;
       }

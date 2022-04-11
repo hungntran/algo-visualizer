@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import useSortingVisualize from "hooks/useSortingVisualize";
-import Button from "components/Button";
 import Bar from "components/Bar";
+import VisualizerControls, { VisualizerStatus } from "./VisualizerControls";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "BUBBLE_SORT",
@@ -21,17 +21,11 @@ type SortingVisualizerProps = {
 const MIN_HEIGHT = 400;
 const MAX_WIDTH = 800;
 
-enum Status {
-  NONE,
-  RUNNING,
-  PAUSED,
-  DONE,
-}
-
 const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
   const [comparing, setComparing] = useState<number[]>([]);
+  const [swapping, setSwapping] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
-  const [status, setStatus] = useState<Status>(Status.NONE);
+  const [status, setStatus] = useState<VisualizerStatus>(VisualizerStatus.NONE);
   const { tracer, setNumbers, numbers, resetNumbers } =
     useSortingVisualize(sourceNumbers);
 
@@ -41,15 +35,18 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
     return null;
   }
 
+  const resetActions = () => {
+    setComparing([]);
+    setSwapping([]);
+  };
+
   const handleStart = () => {
-    setStatus(Status.RUNNING);
+    setStatus(VisualizerStatus.RUNNING);
 
     tracer.start({
       onCompare: (payload) => {
+        resetActions();
         setComparing(payload);
-      },
-      onCompared: () => {
-        setComparing([]);
       },
       onSwap: (payload) => {
         const [numA, numB] = payload;
@@ -61,35 +58,37 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
           a.order = b.order;
           b.order = tmp;
         }
+        resetActions();
+        setSwapping(payload);
         setNumbers(res);
       },
       onSorted: (payload) => {
+        resetActions();
         setSorted((sorted) => sorted.concat(payload));
       },
       onFinish: () => {
-        console.log("finished");
-        setStatus(Status.DONE);
+        setStatus(VisualizerStatus.DONE);
       },
     });
   };
 
   const handlePause = () => {
     tracer.pause();
-    setStatus(Status.PAUSED);
+    setStatus(VisualizerStatus.PAUSED);
   };
 
   const handleReset = () => {
     tracer.reset();
     resetNumbers();
-    setComparing([]);
+    resetActions();
     setSorted([]);
-    setStatus(Status.NONE);
+    setStatus(VisualizerStatus.NONE);
   };
 
   return (
     <div className="p-4">
       <div
-        className="mx-auto bg-purple-100 border-2 border-purple-600 flex justify-center items-end rounded-md"
+        className="mx-auto bg-white border-2 border-primary-600 flex justify-center items-end rounded-md"
         style={{ height: MIN_HEIGHT, width: MAX_WIDTH }}
       >
         <div
@@ -103,22 +102,20 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
               key={value}
               order={order}
               value={value}
+              isSwapping={swapping.includes(value)}
               isComparing={comparing.includes(value)}
               isSorted={sorted.includes(value)}
             />
           ))}
         </div>
       </div>
-      <div className="flex justify-center gap-x-2 mt-4">
-        {status === Status.RUNNING ? (
-          <Button onClick={handlePause} text="Pause" />
-        ) : (
-          <>
-            <Button onClick={handleStart} text="Start" />
-            <Button onClick={handleReset} text="Reset" isOutline />
-          </>
-        )}
-      </div>
+
+      <VisualizerControls
+        status={status}
+        onStart={handleStart}
+        onPause={handlePause}
+        onReset={handleReset}
+      />
     </div>
   );
 };

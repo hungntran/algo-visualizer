@@ -1,13 +1,18 @@
 import React from "react";
-import SortingVisualizer from "components/SortingVisualizer";
-
-const arr = [3, 14, 8, 23, 4, 6, 9, 10, 12, 5, 21, 28, 32, 13, 24, 18];
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Sorting from "pages/Sorting";
+import Home from "pages/Home";
+import Header from "components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <SortingVisualizer sourceNumbers={arr} />
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/sorting" element={<Sorting />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

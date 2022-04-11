@@ -9,11 +9,11 @@ const Button: FC<{
   return (
     <button
       className={classNames(
-        "px-5 py-1.5  hover:bg-purple-600 active:bg-purple-700  rounded-md",
+        "px-5 py-1 hover:bg-primary-600 active:bg-primary-700 rounded-md",
         {
-          "border-2 border-purple-400 text-purple-500 hover:text-white":
+          "border-2 border-primary-500 text-primary-800 hover:text-white":
             isOutline,
-          "bg-purple-500 text-white": !isOutline,
+          "bg-primary-500 text-white": !isOutline,
         }
       )}
       onClick={() => onClick && onClick()}
