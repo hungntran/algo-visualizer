@@ -1,7 +1,12 @@
 import React, { FC, useState } from "react";
 import useSortingVisualize from "hooks/useSortingVisualize";
 import Bar from "components/Bar";
-import VisualizerControls, { VisualizerStatus } from "./VisualizerControls";
+import VisualizerControls, {
+  VisualizerStatus,
+} from "components/VisualizerControls";
+import ListSize from "components/ListSize";
+import AlgorithmDetail from "components/AlgorithmDetail";
+import { generateListUniqueNumber } from "utils/number";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "BUBBLE_SORT",
@@ -15,21 +20,21 @@ export enum SortingState {
 
 type SortingVisualizerProps = {
   type?: SortingAlgorithms;
-  sourceNumbers: number[];
 };
 
 const MIN_HEIGHT = 400;
-const MAX_WIDTH = 800;
+const MAX_WIDTH = 1000;
 
-const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
+const defaultList = generateListUniqueNumber(10);
+
+const SortingVisualizer: FC<SortingVisualizerProps> = () => {
+  const [sourceNumbers, setSourceNumbers] = useState<number[]>(defaultList);
   const [comparing, setComparing] = useState<number[]>([]);
   const [swapping, setSwapping] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
   const [status, setStatus] = useState<VisualizerStatus>(VisualizerStatus.NONE);
-  const { tracer, setNumbers, numbers, resetNumbers } =
+  const { tracer, setNumbers, numbers, resetNumbers, swap } =
     useSortingVisualize(sourceNumbers);
-
-  console.log("render");
 
   if (tracer == null) {
     return null;
@@ -50,24 +55,17 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
       },
       onSwap: (payload) => {
         const [numA, numB] = payload;
-        const res = [...numbers];
-        const a = res.find((num) => num.value === numA);
-        const b = res.find((num) => num.value === numB);
-        if (a && b) {
-          let tmp = a.order;
-          a.order = b.order;
-          b.order = tmp;
-        }
+        swap(numA, numB);
         resetActions();
         setSwapping(payload);
-        setNumbers(res);
+        setNumbers([...numbers]);
       },
       onSorted: (payload) => {
         resetActions();
         setSorted((sorted) => sorted.concat(payload));
       },
       onFinish: () => {
-        setStatus(VisualizerStatus.DONE);
+        setStatus(VisualizerStatus.NONE);
       },
     });
   };
@@ -85,12 +83,20 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
     setStatus(VisualizerStatus.NONE);
   };
 
+  const handleSelectSize = (size: number) => {
+    handleReset();
+    const randomNumbers = generateListUniqueNumber(size);
+    setSourceNumbers(Array.from(randomNumbers));
+  };
+
   return (
-    <div className="p-4">
+    <div className="relative px-4 mx-auto" style={{ maxWidth: MAX_WIDTH }}>
       <div
-        className="mx-auto bg-white border-2 border-primary-600 flex justify-center items-end rounded-md"
-        style={{ height: MIN_HEIGHT, width: MAX_WIDTH }}
+        className="w-full bg-white border-2 border-primary-600 flex justify-center items-end rounded-md"
+        style={{ height: MIN_HEIGHT }}
       >
+        <ListSize onSelect={handleSelectSize} />
+
         <div
           className="relative self-stretch flex items-end"
           style={{
@@ -116,6 +122,8 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ sourceNumbers }) => {
         onPause={handlePause}
         onReset={handleReset}
       />
+
+      <AlgorithmDetail />
     </div>
   );
 };

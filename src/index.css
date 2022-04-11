@@ -6,4 +6,10 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  @apply text-primary-600;
+}
+
+td {
+  @apply px-2;
+  @apply pb-2;
 }

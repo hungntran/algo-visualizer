@@ -6,26 +6,57 @@ export enum VisualizerStatus {
   NONE,
   RUNNING,
   PAUSED,
-  DONE,
 }
 
-const VisualizerControls: FC<{
+type VisualizerControlsProps = {
   status: VisualizerStatus;
   className?: string;
   onPause?: () => void;
   onStart?: () => void;
   onReset?: () => void;
-}> = ({ status, className, onPause, onStart, onReset }) => {
+  onRandomize?: (size?: number) => void;
+};
+
+const VisualizerControls: FC<VisualizerControlsProps> = ({
+  status,
+  className,
+  onPause,
+  onStart,
+  onReset,
+  onRandomize,
+}) => {
+  const handleClickStart = () => {
+    if (
+      status === VisualizerStatus.NONE ||
+      status === VisualizerStatus.PAUSED
+    ) {
+      onStart && onStart();
+      return;
+    }
+
+    if (status === VisualizerStatus.RUNNING) {
+      onPause && onPause();
+      return;
+    }
+  };
+
   return (
-    <div className={classNames("flex justify-center gap-x-2 mt-4", className)}>
-      {status === VisualizerStatus.RUNNING ? (
-        <Button onClick={onPause} text="Pause" />
-      ) : (
-        <>
-          <Button onClick={onStart} text="Start" />
-          <Button onClick={onReset} text="Reset" isOutline />
-        </>
-      )}
+    <div className={classNames("mt-4", className)}>
+      <div className="flex justify-center gap-x-2 mb-4">
+        <Button
+          text={
+            status === VisualizerStatus.RUNNING
+              ? "Pause"
+              : status === VisualizerStatus.PAUSED
+              ? "Resume"
+              : "Start"
+          }
+          onClick={handleClickStart}
+        />
+        {status !== VisualizerStatus.RUNNING && (
+          <Button text="Reset" onClick={onReset} isOutline />
+        )}
+      </div>
     </div>
   );
 };

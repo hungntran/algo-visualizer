@@ -30,7 +30,18 @@ const useSortingVisualize = (sourceNumbers: number[]) => {
     );
   };
 
-  return { tracer, setTracer, numbers, setNumbers, resetNumbers };
+  const swap = (a: number, b: number) => {
+    const numA = numbers.find((num) => num.value === a);
+    const numB = numbers.find((num) => num.value === b);
+
+    if (numA && numB) {
+      let tmp = numA.order;
+      numA.order = numB.order;
+      numB.order = tmp;
+    }
+  };
+
+  return { tracer, setTracer, numbers, setNumbers, swap, resetNumbers };
 };
 
 export default useSortingVisualize;
