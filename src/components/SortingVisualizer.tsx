@@ -1,11 +1,11 @@
 import React, { FC, useState } from "react";
 import useSortingVisualize from "hooks/useSortingVisualize";
 import Bar from "components/Bar";
-import VisualizerControls, {
-  VisualizerStatus,
-} from "components/VisualizerControls";
-import ListSize from "components/ListSize";
+import VisualizerControls, { VisualizerStatus } from "components/VisualizerControls";
 import AlgorithmDetail from "components/AlgorithmDetail";
+import SizeSelect from "components/SizeSelect";
+import SpeedSelect from "components/SpeedSelect";
+import Show from "components/common/Show";
 import { generateListUniqueNumber } from "utils/number";
 
 export enum SortingAlgorithms {
@@ -33,8 +33,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
   const [swapping, setSwapping] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
   const [status, setStatus] = useState<VisualizerStatus>(VisualizerStatus.NONE);
-  const { tracer, setNumbers, numbers, resetNumbers, swap } =
-    useSortingVisualize(sourceNumbers);
+  const { tracer, setNumbers, numbers, resetNumbers, swap } = useSortingVisualize(sourceNumbers);
 
   if (tracer == null) {
     return null;
@@ -89,13 +88,18 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
     setSourceNumbers(Array.from(randomNumbers));
   };
 
+  const isRunning = status === VisualizerStatus.RUNNING;
+
   return (
     <div className="relative px-4 mx-auto" style={{ maxWidth: MAX_WIDTH }}>
       <div
-        className="w-full bg-white border-2 border-primary-600 flex justify-center items-end rounded-md"
+        className="w-full bg-white border-2 border-primary-500 flex justify-center items-end rounded-md"
         style={{ height: MIN_HEIGHT }}
       >
-        <ListSize onSelect={handleSelectSize} />
+        <Show when={!isRunning}>
+          <SizeSelect onSelect={handleSelectSize} />
+          <SpeedSelect />
+        </Show>
 
         <div
           className="relative self-stretch flex items-end"

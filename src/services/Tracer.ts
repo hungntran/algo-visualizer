@@ -4,21 +4,38 @@ export enum TraceState {
   SORTED = "SORTED",
 }
 
+export enum TraceSpeed {
+  SLOW = "SLOW",
+  NORMAL = "NORMAL",
+  FAST = "FAST",
+}
+
 type TraceType = {
   type: TraceState;
   payload: number[];
 };
 
-const STEP_TIME_MS = 500;
+const STEP_TIME_MS = 300;
+
+export const traceSpeedMapped = {
+  [TraceSpeed.SLOW]: 0.5,
+  [TraceSpeed.NORMAL]: 1,
+  [TraceSpeed.FAST]: 2,
+};
 
 class Tracer {
   private traces: TraceType[] = [];
+  private speed: TraceSpeed = TraceSpeed.NORMAL;
   private current: number = 0;
   private timeoutIds = new Set<number>();
   private timestamp: number = 0;
 
   public add(trace: TraceType) {
     this.traces.push(trace);
+  }
+
+  public get resolvedSpeed() {
+    return STEP_TIME_MS / traceSpeedMapped[this.speed];
   }
 
   public start({
@@ -32,7 +49,8 @@ class Tracer {
     onSorted: (payload: number[]) => void;
     onFinish: () => void;
   }) {
-    this.clearTimeout();
+    this.clearTimeouts();
+    const { resolvedSpeed } = this;
     const traces = this.traces.slice(this.current);
 
     traces.forEach((trace) => {
@@ -44,7 +62,7 @@ class Tracer {
           this.current += 1;
           clearTimeout(compareTimeout);
           this.timeoutIds.delete(compareTimeout);
-        }, this.timestamp++ * STEP_TIME_MS);
+        }, this.timestamp++ * resolvedSpeed);
 
         this.timeoutIds.add(compareTimeout);
 
@@ -57,7 +75,7 @@ class Tracer {
           this.current += 1;
           clearTimeout(swapTimeout);
           this.timeoutIds.delete(swapTimeout);
-        }, this.timestamp++ * STEP_TIME_MS);
+        }, this.timestamp++ * resolvedSpeed);
         this.timeoutIds.add(swapTimeout);
 
         return;
@@ -69,28 +87,33 @@ class Tracer {
           this.current += 1;
           clearTimeout(sortedTimeout);
           this.timeoutIds.delete(sortedTimeout);
-        }, this.timestamp++ * STEP_TIME_MS);
+        }, this.timestamp++ * resolvedSpeed);
         this.timeoutIds.add(sortedTimeout);
 
         return;
       }
     });
 
-    window.setTimeout(() => {
+    const finishedTimeout = window.setTimeout(() => {
       onFinish();
-    }, this.timestamp++ * STEP_TIME_MS);
+    }, this.timestamp++ * resolvedSpeed);
+    this.timeoutIds.add(finishedTimeout);
+  }
+
+  public setSpeed(value: TraceSpeed) {
+    this.speed = value;
   }
 
   public pause() {
-    this.clearTimeout();
+    this.clearTimeouts();
   }
 
   public reset() {
-    this.clearTimeout();
+    this.clearTimeouts();
     this.current = 0;
   }
 
-  public clearTimeout() {
+  public clearTimeouts() {
     this.timeoutIds.forEach((timeout) => {
       clearTimeout(timeout);
     });
