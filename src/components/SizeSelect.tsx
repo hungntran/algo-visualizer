@@ -4,7 +4,7 @@ import useGlobal from "hooks/useGlobal";
 
 const buttons = [5, 10, 15, 20];
 
-const ListSize: FC<{
+const SizeSelect: FC<{
   onSelect?: (size: number) => void;
 }> = ({ onSelect }) => {
   const { listSize, setListSize } = useGlobal();
@@ -35,4 +35,4 @@ const ListSize: FC<{
   );
 };
 
-export default ListSize;
+export default SizeSelect;
