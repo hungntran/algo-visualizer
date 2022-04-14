@@ -10,12 +10,6 @@ const AlgorithmDetail = () => {
           the list is repeated until the list is sorted. The algorithm, which is a comparison sort,
           is named for the way smaller or larger elements "bubble" to the top of the list.
         </p>
-        <p>
-          This simple algorithm performs poorly in real world use and is used primarily as an
-          educational tool. More efficient algorithms such as quicksort, timsort, or merge sort are
-          used by the sorting libraries built into popular programming languages such as Python and
-          Java.
-        </p>
       </div>
 
       <div className="p-4 border-2 border-primary-600 rounded-md mb-4 shrink-0">

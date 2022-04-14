@@ -6,6 +6,7 @@ import AlgorithmDetail from "components/AlgorithmDetail";
 import SizeSelect from "components/SizeSelect";
 import SpeedSelect from "components/SpeedSelect";
 import Show from "components/common/Show";
+import Legend from "components/Legend";
 import { generateListUniqueNumber } from "utils/number";
 import { TraceSpeed } from "services/Tracer";
 
@@ -65,7 +66,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
         setSorted((sorted) => sorted.concat(payload));
       },
       onFinish: () => {
-        setStatus(VisualizerStatus.NONE);
+        setStatus(VisualizerStatus.DONE);
       },
     });
   };
@@ -108,6 +109,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
         <Show when={!isRunning}>
           <SizeSelect onSelect={handleSelectSize} />
         </Show>
+        <Legend />
         <SpeedSelect onSelect={handleSelectSpeed} />
 
         <div

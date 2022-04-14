@@ -1,11 +1,13 @@
 import React, { FC } from "react";
 import Button from "components/Button";
 import classNames from "classnames";
+import Show from "./common/Show";
 
 export enum VisualizerStatus {
   NONE,
   RUNNING,
   PAUSED,
+  DONE,
 }
 
 type VisualizerControlsProps = {
@@ -23,13 +25,9 @@ const VisualizerControls: FC<VisualizerControlsProps> = ({
   onPause,
   onStart,
   onReset,
-  onRandomize,
 }) => {
   const handleClickStart = () => {
-    if (
-      status === VisualizerStatus.NONE ||
-      status === VisualizerStatus.PAUSED
-    ) {
+    if (status === VisualizerStatus.NONE || status === VisualizerStatus.PAUSED) {
       onStart && onStart();
       return;
     }
@@ -40,22 +38,22 @@ const VisualizerControls: FC<VisualizerControlsProps> = ({
     }
   };
 
+  const isDone = status === VisualizerStatus.DONE;
+  const isRunning = status === VisualizerStatus.RUNNING;
+  const isPaused = status === VisualizerStatus.PAUSED;
+
   return (
     <div className={classNames("mt-4", className)}>
       <div className="flex justify-center gap-x-2 mb-4">
-        <Button
-          text={
-            status === VisualizerStatus.RUNNING
-              ? "Pause"
-              : status === VisualizerStatus.PAUSED
-              ? "Resume"
-              : "Start"
-          }
-          onClick={handleClickStart}
-        />
-        {status !== VisualizerStatus.RUNNING && (
+        <Show when={!isDone}>
+          <Button
+            text={isRunning ? "Pause" : isPaused ? "Resume" : "Start"}
+            onClick={handleClickStart}
+          />
+        </Show>
+        <Show when={!isRunning}>
           <Button text="Reset" onClick={onReset} isOutline />
-        )}
+        </Show>
       </div>
     </div>
   );
