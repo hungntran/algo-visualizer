@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Tracer from "services/Tracer";
 import bubbleSort from "algorithms/sorting/bubbleSort";
-import useGlobal from "hooks/useGlobal";
 
 type NumberProps = {
   value: number;
@@ -11,7 +10,6 @@ type NumberProps = {
 const useSortingVisualize = (sourceNumbers: number[]) => {
   const [tracer, setTracer] = useState<Tracer>();
   const [numbers, setNumbers] = useState<NumberProps[]>([]);
-  const { speed } = useGlobal();
 
   useEffect(() => {
     setNumbers(
@@ -22,11 +20,6 @@ const useSortingVisualize = (sourceNumbers: number[]) => {
     );
     setTracer(bubbleSort(sourceNumbers));
   }, [sourceNumbers]);
-
-  useEffect(() => {
-    tracer?.setSpeed(speed);
-    tracer?.clearTimeouts();
-  }, [speed, tracer]);
 
   const resetNumbers = () => {
     setNumbers(

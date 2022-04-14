@@ -7,6 +7,7 @@ import SizeSelect from "components/SizeSelect";
 import SpeedSelect from "components/SpeedSelect";
 import Show from "components/common/Show";
 import { generateListUniqueNumber } from "utils/number";
+import { TraceSpeed } from "services/Tracer";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "BUBBLE_SORT",
@@ -90,6 +91,14 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
 
   const isRunning = status === VisualizerStatus.RUNNING;
 
+  const handleSelectSpeed = (speed: TraceSpeed) => {
+    tracer.setSpeed(speed);
+
+    if (isRunning) {
+      handleStart();
+    }
+  };
+
   return (
     <div className="relative px-4 mx-auto" style={{ maxWidth: MAX_WIDTH }}>
       <div
@@ -98,8 +107,8 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
       >
         <Show when={!isRunning}>
           <SizeSelect onSelect={handleSelectSize} />
-          <SpeedSelect />
         </Show>
+        <SpeedSelect onSelect={handleSelectSpeed} />
 
         <div
           className="relative self-stretch flex items-end"

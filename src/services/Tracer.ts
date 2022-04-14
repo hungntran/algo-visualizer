@@ -102,6 +102,7 @@ class Tracer {
 
   public setSpeed(value: TraceSpeed) {
     this.speed = value;
+    this.clearTimeouts();
   }
 
   public pause() {
