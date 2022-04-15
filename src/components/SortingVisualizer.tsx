@@ -2,17 +2,13 @@ import React, { FC, useState } from "react";
 import useSortingVisualize from "hooks/useSortingVisualize";
 import Bar from "components/Bar";
 import VisualizerControls, { VisualizerStatus } from "components/VisualizerControls";
-import AlgorithmDetail from "components/AlgorithmDetail";
 import SizeSelect from "components/SizeSelect";
 import SpeedSelect from "components/SpeedSelect";
 import Show from "components/common/Show";
 import Legend from "components/Legend";
 import { generateListUniqueNumber } from "utils/number";
 import { TraceSpeed } from "services/Tracer";
-
-export enum SortingAlgorithms {
-  BUBBLE_SORT = "BUBBLE_SORT",
-}
+import { SortingAlgorithms } from "pages/Sorting";
 
 export enum SortingState {
   COMPARE = "COMPARE",
@@ -21,24 +17,30 @@ export enum SortingState {
 }
 
 type SortingVisualizerProps = {
-  type?: SortingAlgorithms;
+  type: SortingAlgorithms;
 };
 
 const MIN_HEIGHT = 400;
-const MAX_WIDTH = 1000;
 
 const defaultList = generateListUniqueNumber(10);
 
-const SortingVisualizer: FC<SortingVisualizerProps> = () => {
+const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>(defaultList);
   const [comparing, setComparing] = useState<number[]>([]);
   const [swapping, setSwapping] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
   const [status, setStatus] = useState<VisualizerStatus>(VisualizerStatus.NONE);
-  const { tracer, setNumbers, numbers, resetNumbers, swap } = useSortingVisualize(sourceNumbers);
+  const { tracer, setNumbers, numbers, resetNumbers, swap } = useSortingVisualize(
+    sourceNumbers,
+    type
+  );
 
   if (tracer == null) {
-    return null;
+    return (
+      <div className="flex items-center justify-center" style={{ height: MIN_HEIGHT + 68 }}>
+        Loading...
+      </div>
+    ); // Placeholder for component
   }
 
   const resetActions = () => {
@@ -101,7 +103,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
   };
 
   return (
-    <div className="relative px-4 mx-auto" style={{ maxWidth: MAX_WIDTH }}>
+    <div className="relative">
       <div
         className="w-full bg-white border-2 border-primary-500 flex justify-center items-end rounded-md"
         style={{ height: MIN_HEIGHT }}
@@ -137,8 +139,6 @@ const SortingVisualizer: FC<SortingVisualizerProps> = () => {
         onPause={handlePause}
         onReset={handleReset}
       />
-
-      <AlgorithmDetail />
     </div>
   );
 };

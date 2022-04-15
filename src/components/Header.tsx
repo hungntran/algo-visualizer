@@ -1,11 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import classNames from "classnames";
+import { Link, useLocation } from "react-router-dom";
+import Container from "./common/Container";
+
+const navigators = [
+  {
+    path: "/sorting",
+    text: "Sorting",
+  },
+];
 
 const Header = () => {
+  const location = useLocation();
+
+  console.log(location);
+
   return (
-    <div className="h-14 flex items-center gap-x-8 px-6 font-semibold text-primary-500 shadow-sm">
-      <Link to="/">Algo Visualizer</Link>
-      <Link to="/sorting">Sorting</Link>
+    <div>
+      <Container>
+        <div className="flex items-center gap-x-8 py-4 font-semibold text-primary-500">
+          <Link to="/">Algo Visualizer</Link>
+          {navigators.map(({ path, text }) => (
+            <div
+              key={text}
+              className={classNames("flex items-center", {
+                "text-secondary-700": location.pathname.includes(path),
+              })}
+            >
+              <Link to={path}>{text}</Link>
+            </div>
+          ))}
+        </div>
+      </Container>
     </div>
   );
 };

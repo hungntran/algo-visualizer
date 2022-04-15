@@ -1,8 +1,7 @@
 import Tracer, { TraceState } from "services/Tracer";
 
-const bubbleSort = (arr: number[]): Tracer => {
+const bubbleSort = (numbers: number[]): Tracer => {
   const tracer = new Tracer();
-  const numbers = [...arr];
   const length = numbers.length;
 
   for (let i = 0; i < length; i++) {

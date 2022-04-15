@@ -53,6 +53,9 @@ module.exports = {
           900: "#531010",
         },
       },
+      minWidth: {
+        64: "16rem",
+      },
     },
   },
   plugins: [],

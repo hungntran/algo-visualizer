@@ -18,9 +18,9 @@ const legendDisplayMap = [
 
 const Legend = () => {
   return (
-    <div className="absolute top-0 left-4 border-2 border-primary-500 rounded-tl-md rounded-br-md">
+    <div className="absolute top-0 left-0 border-2 border-primary-500 rounded-tl-md rounded-br-md">
       {legendDisplayMap.map((item) => (
-        <div className="flex gap-x-2 items-center px-2 py-1">
+        <div key={item.text} className="flex gap-x-2 items-center px-2 py-1">
           <div className={classNames("w-4 h-4 border-2", item.color)}></div>
           <div className="text-sm font-semibold">{item.text}</div>
         </div>

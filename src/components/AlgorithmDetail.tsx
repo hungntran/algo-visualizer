@@ -1,42 +1,71 @@
-import React from "react";
+import React, { FC } from "react";
 
-const AlgorithmDetail = () => {
+export enum TimeComplexity {
+  O_1,
+  O_N,
+  O_N2,
+  O_LOGN,
+  O_N_LOGN,
+}
+
+const timeComplexityDisplay = {
+  [TimeComplexity.O_1]: "O(1)",
+  [TimeComplexity.O_N]: "O(n)",
+  [TimeComplexity.O_N2]: (
+    <span>
+      O(n<sup>2</sup>)
+    </span>
+  ),
+  [TimeComplexity.O_LOGN]: "O(logn)",
+  [TimeComplexity.O_N_LOGN]: "O(nlogn)",
+};
+
+const AlgorithmDetail: FC<{
+  worstCase: TimeComplexity;
+  averageCase: TimeComplexity;
+  bestCase: TimeComplexity;
+  space: TimeComplexity;
+  info: React.ReactNode;
+  link: string;
+  isStable: boolean;
+}> = ({ worstCase, averageCase, bestCase, space, info, link, isStable }) => {
   return (
     <div className="flex flex-col-reverse sm:flex-row gap-x-4">
       <div className="p-4 border-2 border-primary-600 rounded-md mb-4">
-        <p className="mb-2">
-          <b>Bubble sort</b> is a simple sorting algorithm that repeatedly steps through the list,
-          compares adjacent elements and swaps them if they are in the wrong order. The pass through
-          the list is repeated until the list is sorted. The algorithm, which is a comparison sort,
-          is named for the way smaller or larger elements "bubble" to the top of the list.
-        </p>
+        <div>
+          {info}
+          <a
+            href={link}
+            target="_blank"
+            rel="noreferrer"
+            className="text-blue-500 hover:text-blue-700 ml-2"
+          >
+            Wikipedia
+          </a>
+        </div>
       </div>
 
-      <div className="p-4 border-2 border-primary-600 rounded-md mb-4 shrink-0">
-        <table className="w-full">
-          <tbody>
-            <tr>
-              <td>Worst-case</td>
-              <td className="font-semibold">
-                O(n<sup>2</sup>)
-              </td>
-            </tr>
-            <tr>
-              <td>Average</td>
-              <td className="font-semibold">
-                O(n<sup>2</sup>)
-              </td>
-            </tr>
-            <tr>
-              <td>Best-case</td>
-              <td className="font-semibold">O(n)</td>
-            </tr>
-            <tr>
-              <td>Space complexity</td>
-              <td className="font-semibold">O(n)</td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="p-4 border-2 border-primary-600 rounded-md mb-4 shrink-0 min-w-64 flex flex-col gap-y-2">
+        <div className="flex justify-between">
+          <div>Worst-case</div>
+          <div className="font-semibold">{timeComplexityDisplay[worstCase]}</div>
+        </div>
+        <div className="flex justify-between font-semibold">
+          <div>Average</div>
+          <div>{timeComplexityDisplay[averageCase]}</div>
+        </div>
+        <div className="flex justify-between">
+          <div>Best-case</div>
+          <div className="font-semibold">{timeComplexityDisplay[bestCase]}</div>
+        </div>
+        <div className="font-semibold flex justify-between">
+          <div>Space complexity</div>
+          <div>{timeComplexityDisplay[space]}</div>
+        </div>
+        <div className="font-semibold flex justify-between">
+          <div>Stability</div>
+          <div>{isStable ? "Yes" : "No"}</div>
+        </div>
       </div>
     </div>
   );

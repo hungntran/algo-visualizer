@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import Tracer from "services/Tracer";
 import bubbleSort from "algorithms/sorting/bubbleSort";
+import { SortingAlgorithms } from "pages/Sorting";
+import selectionSort from "algorithms/sorting/selectionSort";
 
 type NumberProps = {
   value: number;
   order: number;
 };
 
-const useSortingVisualize = (sourceNumbers: number[]) => {
+const algoMapped = {
+  [SortingAlgorithms.BUBBLE_SORT]: bubbleSort,
+  [SortingAlgorithms.SELECTION_SORT]: selectionSort,
+};
+
+const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {
   const [tracer, setTracer] = useState<Tracer>();
   const [numbers, setNumbers] = useState<NumberProps[]>([]);
 
@@ -18,8 +25,8 @@ const useSortingVisualize = (sourceNumbers: number[]) => {
         order: index,
       }))
     );
-    setTracer(bubbleSort(sourceNumbers));
-  }, [sourceNumbers]);
+    setTracer(algoMapped[type]([...sourceNumbers]));
+  }, [sourceNumbers, type]);
 
   const resetNumbers = () => {
     setNumbers(
