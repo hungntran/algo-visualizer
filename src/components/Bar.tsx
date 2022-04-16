@@ -16,7 +16,7 @@ const Bar: FC<{
           "bg-primary-500 border-primary-800": !isComparing && !isSorted && !isSwapping,
           "bg-custom-400 border-custom-700": isSwapping,
           "bg-tertiary-500 border-tertiary-800": isComparing,
-          "bg-secondary-400 border-secondary-700": isSorted,
+          "bg-secondary-400 border-secondary-700": isSorted && !isComparing && !isSwapping,
         }
       )}
       style={{

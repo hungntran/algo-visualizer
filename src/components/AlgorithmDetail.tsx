@@ -30,33 +30,33 @@ const AlgorithmDetail: FC<{
   isStable: boolean;
 }> = ({ worstCase, averageCase, bestCase, space, info, link, isStable }) => {
   return (
-    <div className="flex flex-col-reverse sm:flex-row gap-x-4">
+    <div className="flex flex-col-reverse md:flex-row md:items-start gap-x-4">
       <div className="p-4 border-2 border-primary-600 rounded-md mb-4">
-        <div>
-          {info}
+        <div className="leading-normal">{info}</div>
+        <div className="text-right">
           <a
             href={link}
             target="_blank"
             rel="noreferrer"
-            className="text-blue-500 hover:text-blue-700 ml-2"
+            className="text-blue-500 hover:text-blue-700"
           >
             Wikipedia
           </a>
         </div>
       </div>
 
-      <div className="p-4 border-2 border-primary-600 rounded-md mb-4 shrink-0 min-w-64 flex flex-col gap-y-2">
+      <div className="p-4 border-2 border-primary-600 rounded-md mb-4 shrink-0 min-w-64 flex flex-col gap-y-4">
         <div className="flex justify-between">
-          <div>Worst-case</div>
-          <div className="font-semibold">{timeComplexityDisplay[worstCase]}</div>
+          <div>Best-case</div>
+          <div className="font-semibold">{timeComplexityDisplay[bestCase]}</div>
         </div>
         <div className="flex justify-between font-semibold">
           <div>Average</div>
           <div>{timeComplexityDisplay[averageCase]}</div>
         </div>
         <div className="flex justify-between">
-          <div>Best-case</div>
-          <div className="font-semibold">{timeComplexityDisplay[bestCase]}</div>
+          <div>Worst-case</div>
+          <div className="font-semibold">{timeComplexityDisplay[worstCase]}</div>
         </div>
         <div className="font-semibold flex justify-between">
           <div>Space complexity</div>

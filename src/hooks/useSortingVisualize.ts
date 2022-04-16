@@ -3,6 +3,7 @@ import Tracer from "services/Tracer";
 import bubbleSort from "algorithms/sorting/bubbleSort";
 import { SortingAlgorithms } from "pages/Sorting";
 import selectionSort from "algorithms/sorting/selectionSort";
+import insertionSort from "algorithms/sorting/insertionSort";
 
 type NumberProps = {
   value: number;
@@ -12,6 +13,7 @@ type NumberProps = {
 const algoMapped = {
   [SortingAlgorithms.BUBBLE_SORT]: bubbleSort,
   [SortingAlgorithms.SELECTION_SORT]: selectionSort,
+  [SortingAlgorithms.INSERTION_SORT]: insertionSort,
 };
 
 const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {

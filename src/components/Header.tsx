@@ -13,12 +13,10 @@ const navigators = [
 const Header = () => {
   const location = useLocation();
 
-  console.log(location);
-
   return (
     <div>
       <Container>
-        <div className="flex items-center gap-x-8 py-4 font-semibold text-primary-500">
+        <div className="flex items-center gap-x-8 py-4 font-bold text-primary-500">
           <Link to="/">Algo Visualizer</Link>
           {navigators.map(({ path, text }) => (
             <div

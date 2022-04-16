@@ -9,6 +9,7 @@ import Legend from "components/Legend";
 import { generateListUniqueNumber } from "utils/number";
 import { TraceSpeed } from "services/Tracer";
 import { SortingAlgorithms } from "pages/Sorting";
+import useGlobal from "hooks/useGlobal";
 
 export enum SortingState {
   COMPARE = "COMPARE",
@@ -22,10 +23,9 @@ type SortingVisualizerProps = {
 
 const MIN_HEIGHT = 400;
 
-const defaultList = generateListUniqueNumber(10);
-
 const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
-  const [sourceNumbers, setSourceNumbers] = useState<number[]>(defaultList);
+  const { listSize, speed } = useGlobal();
+  const [sourceNumbers, setSourceNumbers] = useState<number[]>(generateListUniqueNumber(listSize));
   const [comparing, setComparing] = useState<number[]>([]);
   const [swapping, setSwapping] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
@@ -50,6 +50,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
 
   const handleStart = () => {
     setStatus(VisualizerStatus.RUNNING);
+    tracer.setSpeed(speed);
 
     tracer.start({
       onCompare: (payload) => {
