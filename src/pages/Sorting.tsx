@@ -24,8 +24,8 @@ export const titleColorMapped = {
 const Sorting = () => {
   return (
     <Container>
-      <h1 className="text-4xl font-bold text-primary-600 text-center my-8">Sorting</h1>
-      <div className="grid grid-cols-3 gap-6">
+      <h1 className="text-4xl font-bold text-primary-500 text-center my-8">Sorting</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {Object.values(SortingAlgorithms).map((item) => (
           <Link to={`/sorting/${item}`} key={item}>
             <div className="p-4 border-2 hover:border-primary-500 transition-colors text-xl rounded-md font-bold flex justify-center items-center">
