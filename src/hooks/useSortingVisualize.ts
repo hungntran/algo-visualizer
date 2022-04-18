@@ -14,6 +14,7 @@ const algoMapped = {
   [SortingAlgorithms.BUBBLE_SORT]: bubbleSort,
   [SortingAlgorithms.SELECTION_SORT]: selectionSort,
   [SortingAlgorithms.INSERTION_SORT]: insertionSort,
+  [SortingAlgorithms.MERGE_SORT]: insertionSort,
 };
 
 const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {
