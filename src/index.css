@@ -12,3 +12,12 @@ body {
 p {
   @apply mb-2;
 }
+
+ul {
+  @apply list-disc ml-8 pt-2;
+}
+
+.link {
+  @apply underline underline-offset-2;
+  @apply hover:text-primary-700;
+}

@@ -6,6 +6,7 @@ import Container from "components/common/Container";
 import GradientText from "components/common/GradientText";
 import Box from "components/common/Box";
 import AlgorithmComplexity from "components/algorithm/AlgorithmComplexity";
+import BaseLink from "components/common/BaseLink";
 
 const SortingDetail = () => {
   const { type } = useParams<{ type: SortingAlgorithms }>();
@@ -14,12 +15,12 @@ const SortingDetail = () => {
     return <Navigate to="/sorting" />;
   }
 
-  const { name, worstCase, averageCase, bestCase, space, info, isStable, when } =
+  const { name, worstCase, averageCase, bestCase, space, info, isStable, applications, wiki } =
     sortingAlgorithmsMapped[type];
 
   return (
     <Container>
-      <div className="grid grid-cols-4">
+      <div className="desktop:grid desktop:grid-cols-4">
         <div className="relative col-span-3">
           <h1 className="text-4xl font-bold text-primary-600 text-center my-7">
             <GradientText className={titleColorMapped[type]}>{name}</GradientText>
@@ -48,12 +49,17 @@ const SortingDetail = () => {
         </div>
 
         <div className="col-span-3 mb-4 desktop:mb-0">
-          <Box title="Description">{info}</Box>
+          <Box title="Description">
+            {info}
+            <div className="text-right mt-2">
+              <BaseLink href={wiki}>Wikipedia</BaseLink>
+            </div>
+          </Box>
         </div>
 
         <div className="col-span-1">
-          <Box title="Used when">
-            <div>{when}</div>
+          <Box title="Applications">
+            <div>{applications}</div>
           </Box>
         </div>
       </div>

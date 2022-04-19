@@ -4,6 +4,7 @@ import bubbleSort from "algorithms/sorting/bubbleSort";
 import { SortingAlgorithms } from "pages/Sorting";
 import selectionSort from "algorithms/sorting/selectionSort";
 import insertionSort from "algorithms/sorting/insertionSort";
+import traceMergeSort from "algorithms/sorting/mergeSort";
 
 type NumberProps = {
   value: number;
@@ -14,7 +15,7 @@ const algoMapped = {
   [SortingAlgorithms.BUBBLE_SORT]: bubbleSort,
   [SortingAlgorithms.SELECTION_SORT]: selectionSort,
   [SortingAlgorithms.INSERTION_SORT]: insertionSort,
-  [SortingAlgorithms.MERGE_SORT]: insertionSort,
+  [SortingAlgorithms.MERGE_SORT]: traceMergeSort,
 };
 
 const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {

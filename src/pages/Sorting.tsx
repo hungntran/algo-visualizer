@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "components/common/Container";
 import GradientText from "components/common/GradientText";
 import { TimeComplexity } from "components/algorithm/AlgorithmComplexity";
+import BaseLink from "components/common/BaseLink";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "bubble-sort",
@@ -33,7 +34,7 @@ export const sortingAlgorithmsMapped = {
     bestCase: TimeComplexity.O_N,
     space: TimeComplexity.O_1,
     isStable: true,
-    when: (
+    applications: (
       <>
         <p>Complexity does not matter</p>
         <p>Short and simple code is preferred</p>
@@ -55,7 +56,7 @@ export const sortingAlgorithmsMapped = {
         </p>
       </>
     ),
-    link: "https://en.wikipedia.org/wiki/Bubble_sort",
+    wiki: "https://en.wikipedia.org/wiki/Bubble_sort",
   },
   [SortingAlgorithms.SELECTION_SORT]: {
     name: "Selection Sort",
@@ -64,7 +65,7 @@ export const sortingAlgorithmsMapped = {
     bestCase: TimeComplexity.O_N2,
     space: TimeComplexity.O_1,
     isStable: false,
-    when: (
+    applications: (
       <>
         <p>A small list is to be sorted</p>
         <p>Cost of swapping does not matter</p>
@@ -95,7 +96,7 @@ export const sortingAlgorithmsMapped = {
         </p>
       </>
     ),
-    link: "https://en.wikipedia.org/wiki/Selection_sort",
+    wiki: "https://en.wikipedia.org/wiki/Selection_sort",
   },
   [SortingAlgorithms.INSERTION_SORT]: {
     name: "Insertion Sort",
@@ -104,7 +105,7 @@ export const sortingAlgorithmsMapped = {
     bestCase: TimeComplexity.O_N,
     space: TimeComplexity.O_1,
     isStable: true,
-    when: (
+    applications: (
       <>
         <p>The array is has a small number of elements</p>
         <p>There are only a few elements left to be sorted</p>
@@ -116,7 +117,7 @@ export const sortingAlgorithmsMapped = {
         list) one item at a time. It is much less efficient on large lists than more advanced
         algorithms such as <b>quicksort</b>, <b>heapsort</b>, or <b>merge sort</b>. However,
         insertion sort provides several advantages:
-        <ul className="list-disc ml-8 pt-2">
+        <ul>
           <li>
             Simple implementation: Jon Bentley shows a three-line C++ version, and a five-line
             optimized version
@@ -143,55 +144,51 @@ export const sortingAlgorithmsMapped = {
         </ul>
       </div>
     ),
-    link: "https://en.wikipedia.org/wiki/Insertion_sort",
+    wiki: "https://en.wikipedia.org/wiki/Insertion_sort",
   },
   [SortingAlgorithms.MERGE_SORT]: {
     name: "Merge Sort",
-    worstCase: TimeComplexity.O_N2,
-    averageCase: TimeComplexity.O_N2,
-    bestCase: TimeComplexity.O_N,
-    space: TimeComplexity.O_1,
+    worstCase: TimeComplexity.O_N_LOGN,
+    averageCase: TimeComplexity.O_N_LOGN,
+    bestCase: TimeComplexity.O_N_LOGN,
+    space: TimeComplexity.O_N,
     isStable: true,
-    when: (
+    applications: (
       <>
-        <p>The array is has a small number of elements</p>
-        <p>There are only a few elements left to be sorted</p>
+        <p>To sort linked lists in O(n logn) time</p>
+        <p>Inversion count problem</p>
+        <p>
+          Used in{" "}
+          <BaseLink href="https://en.wikipedia.org/wiki/External_sorting">
+            External Sorting
+          </BaseLink>
+        </p>
       </>
     ),
     info: (
       <div>
-        <b>Insertion sort</b> is a simple sorting algorithm that builds the final sorted array (or
-        list) one item at a time. It is much less efficient on large lists than more advanced
-        algorithms such as <b>quicksort</b>, <b>heapsort</b>, or <b>merge sort</b>. However,
-        insertion sort provides several advantages:
-        <ul className="list-disc ml-8 pt-2">
+        <p>
+          In computer science, <b>merge sort</b> (also commonly spelled as mergesort) is an
+          efficient, general-purpose, and comparison-based sorting algorithm. Most implementations
+          produce a stable sort, which means that the order of equal elements is the same in the
+          input and output. Merge sort is a divide-and-conquer algorithm that was invented by John
+          von Neumann in 1945. A detailed description and analysis of bottom-up merge sort appeared
+          in a report by Goldstine and von Neumann as early as 1948.
+        </p>
+        <div>Conceptually, a merge sort works as follows:</div>
+        <ul>
           <li>
-            Simple implementation: Jon Bentley shows a three-line C++ version, and a five-line
-            optimized version
+            Divide the unsorted list into n sublists, each containing one element (a list of one
+            element is considered sorted).
           </li>
           <li>
-            Efficient for (quite) small data sets, much like other quadratic sorting algorithms
-          </li>
-          <li>
-            More efficient in practice than most other simple quadratic (i.e., O(n<sup>2</sup>))
-            algorithms such as selection sort or bubble sort
-          </li>
-          <li>
-            <b>Adaptive</b>: i.e., efficient for data sets that are already substantially sorted:
-            the time complexity is O(kn) when each element in the input is no more than k places
-            away from its sorted position
-          </li>
-          <li>
-            <b>Stable</b>: i.e., does not change the relative order of elements with equal keys
-            In-place; i.e., only requires a constant amount O(1) of additional memory space
-          </li>
-          <li>
-            <b>Online</b>: i.e., can sort a list as it receives it
+            Repeatedly merge sublists to produce new sorted sublists until there is only one sublist
+            remaining. This will be the sorted list.
           </li>
         </ul>
       </div>
     ),
-    link: "https://en.wikipedia.org/wiki/Insertion_sort",
+    wiki: "https://en.wikipedia.org/wiki/Merge_sort",
   },
 };
 

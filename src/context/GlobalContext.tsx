@@ -15,8 +15,10 @@ export const GlobalContext = createContext<GlobalContextType>({
   setSpeed: () => [],
 });
 
+const DEFAULT_SIZE = 15
+
 const GlobalContextProvider: FC = ({ children }) => {
-  const [listSize, setListSize] = useState(10);
+  const [listSize, setListSize] = useState(DEFAULT_SIZE);
   const [speed, setSpeed] = useState<TraceSpeed>(TraceSpeed.NORMAL);
 
   return (
