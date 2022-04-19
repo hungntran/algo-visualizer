@@ -24,7 +24,7 @@ type SortingVisualizerProps = {
 const MIN_HEIGHT = 400;
 
 const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
-  const { listSize, speed } = useGlobal();
+  const { listSize } = useGlobal();
   const [sourceNumbers, setSourceNumbers] = useState<number[]>(generateListUniqueNumber(listSize));
   const [comparing, setComparing] = useState<number[]>([]);
   const [swapping, setSwapping] = useState<number[]>([]);
@@ -50,7 +50,6 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
 
   const handleStart = () => {
     setStatus(VisualizerStatus.RUNNING);
-    tracer.setSpeed(speed);
 
     tracer.start({
       onCompare: (payload) => {

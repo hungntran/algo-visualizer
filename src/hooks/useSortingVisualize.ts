@@ -5,6 +5,7 @@ import { SortingAlgorithms } from "pages/Sorting";
 import selectionSort from "algorithms/sorting/selectionSort";
 import insertionSort from "algorithms/sorting/insertionSort";
 import traceMergeSort from "algorithms/sorting/mergeSort";
+import useGlobal from "./useGlobal";
 
 type NumberProps = {
   value: number;
@@ -19,6 +20,7 @@ const algoMapped = {
 };
 
 const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {
+  const { speed } = useGlobal();
   const [tracer, setTracer] = useState<Tracer>();
   const [numbers, setNumbers] = useState<NumberProps[]>([]);
 
@@ -29,7 +31,11 @@ const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) =
         order: index,
       }))
     );
-    setTracer(algoMapped[type]([...sourceNumbers]));
+
+    const tracer = algoMapped[type]([...sourceNumbers]);
+    setTracer(tracer);
+    tracer.setSpeed(speed);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sourceNumbers, type]);
 
   const resetNumbers = () => {
