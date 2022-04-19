@@ -4,7 +4,10 @@
 
 A minimal tool to visualize algorithms built with React.
 
-The purpose of this project is to practice my front-end skills and improve my knowledge of algorithms.
+The purpose of this project:
+
+-  Practice my front-end skills
+-  Improve my knowledge of algorithms.
 
 ### Todo
 
@@ -12,6 +15,7 @@ The purpose of this project is to practice my front-end skills and improve my kn
 - [x] Adjust speed of the player
 - [ ] Go back and go forward
 - [ ] Code view
+- [ ] Dark mode
 
 
 ### Built With
