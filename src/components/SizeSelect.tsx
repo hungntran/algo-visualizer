@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import classNames from "classnames";
 import useGlobal from "hooks/useGlobal";
 
-const buttons = [5, 10, 15, 20];
+const buttons = [5, 10, 15, 20, 25];
 
 const SizeSelect: FC<{
   onSelect?: (size: number) => void;
@@ -18,10 +18,9 @@ const SizeSelect: FC<{
         return (
           <button
             key={item}
-            className={classNames(
-              "px-2 py-0.5 text-sm w-9 transition-colors font-semibold",
-              { "bg-primary-400 text-white": listSize === item }
-            )}
+            className={classNames("px-2 py-0.5 text-sm w-9 transition-colors font-semibold", {
+              "bg-primary-400 text-white": listSize === item,
+            })}
             onClick={() => {
               setListSize(item);
               onSelect && onSelect(item);

@@ -2,6 +2,7 @@ export enum TraceState {
   COMPARE = "COMPARE",
   SWAP = "SWAP",
   SORTED = "SORTED",
+  INSERT = "INSERT",
 }
 
 export enum TraceSpeed {
@@ -34,6 +35,11 @@ class Tracer {
     this.traces.push(trace);
   }
 
+  public clear() {
+    this.traces = [];
+    this.reset();
+  }
+
   public get resolvedSpeed() {
     return STEP_TIME_MS / traceSpeedMapped[this.speed];
   }
@@ -42,10 +48,12 @@ class Tracer {
     onCompare,
     onSwap,
     onFinish,
+    onInsert,
     onSorted,
   }: {
     onCompare: (payload: number[]) => void;
     onSwap: (payload: number[]) => void;
+    onInsert: (payload: number[]) => void;
     onSorted: (payload: number[]) => void;
     onFinish: () => void;
   }) {
@@ -56,42 +64,24 @@ class Tracer {
     traces.forEach((trace) => {
       const { type, payload } = trace;
 
-      if (type === TraceState.COMPARE) {
-        const compareTimeout = window.setTimeout(() => {
+      const timeout = window.setTimeout(() => {
+        if (type === TraceState.COMPARE) {
           onCompare(payload);
-          this.current += 1;
-          clearTimeout(compareTimeout);
-          this.timeoutIds.delete(compareTimeout);
-        }, this.timestamp++ * resolvedSpeed);
-
-        this.timeoutIds.add(compareTimeout);
-
-        return;
-      }
-
-      if (type === TraceState.SWAP) {
-        const swapTimeout = window.setTimeout(() => {
+        } else if (type === TraceState.SWAP) {
           onSwap(payload);
-          this.current += 1;
-          clearTimeout(swapTimeout);
-          this.timeoutIds.delete(swapTimeout);
-        }, this.timestamp++ * resolvedSpeed);
-        this.timeoutIds.add(swapTimeout);
-
-        return;
-      }
-
-      if (type === TraceState.SORTED) {
-        const sortedTimeout = window.setTimeout(() => {
+        } else if (type === TraceState.INSERT) {
+          onInsert(payload);
+        } else if (type === TraceState.SORTED) {
           onSorted(payload);
-          this.current += 1;
-          clearTimeout(sortedTimeout);
-          this.timeoutIds.delete(sortedTimeout);
-        }, this.timestamp++ * resolvedSpeed);
-        this.timeoutIds.add(sortedTimeout);
+        }
+        this.current += 1;
+        clearTimeout(timeout);
+        this.timeoutIds.delete(timeout);
+      }, this.timestamp++ * resolvedSpeed);
 
-        return;
-      }
+      this.timeoutIds.add(timeout);
+
+      return;
     });
 
     const finishedTimeout = window.setTimeout(() => {

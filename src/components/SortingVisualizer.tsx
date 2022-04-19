@@ -64,6 +64,25 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
         setSwapping(payload);
         setNumbers([...numbers]);
       },
+      onInsert: (payload) => {
+        const source = numbers.find((num) => num.value === payload[0]);
+        const target = numbers.find((num) => num.value === payload[1]);
+
+        if (source == null || target == null) {
+          return;
+        }
+
+        const currentOrder = source.order;
+        source.order = target.order;
+        target.order += 1;
+        numbers.forEach((num) => {
+          if (num.order > source.order && num.order < currentOrder && num !== target) {
+            num.order += 1;
+          }
+        });
+
+        setNumbers([...numbers]);
+      },
       onSorted: (payload) => {
         resetActions();
         setSorted((sorted) => sorted.concat(payload));
