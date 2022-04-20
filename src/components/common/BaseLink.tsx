@@ -1,8 +1,9 @@
+import classNames from "classnames";
 import React, { FC } from "react";
 
-const BaseLink: FC<{ href: string }> = ({ children, href }) => {
+const BaseLink: FC<{ href: string; className?: string }> = ({ children, className, href }) => {
   return (
-    <a className="link" href={href} target="_blank" rel="noreferrer">
+    <a className={classNames("link", className)} href={href} target="_blank" rel="noreferrer">
       {children}
     </a>
   );
