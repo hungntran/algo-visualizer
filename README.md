@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1f97d81f-4aee-42c5-96d8-5b9c50ae3f49/deploy-status)](https://app.netlify.com/sites/algovisual98/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1f97d81f-4aee-42c5-96d8-5b9c50ae3f49/deploy-status)](https://algorithms-visual.netlify.app/)
 
 ## About The Project
 
