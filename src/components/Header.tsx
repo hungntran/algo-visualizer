@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <div>
       <Container>
-        <div className="flex justify-between">
+        <div className="flex justify-between flex-wrap">
           <div className="flex items-center gap-x-8 py-4 font-bold">
             <Link to="/">Algo Visualizer</Link>
             {navigators.map(({ path, text }) => (

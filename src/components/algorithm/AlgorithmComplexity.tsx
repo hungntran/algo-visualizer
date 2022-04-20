@@ -52,9 +52,7 @@ const AlgorithmComplexity: FC<{
           </div>
         </div>
       </Box>
-      <Box title="Space complexity">
-        <div>{timeComplexityDisplay[space]}</div>
-      </Box>
+      <Box title="Space complexity">{timeComplexityDisplay[space]}</Box>
       <Box title="Stable">
         <Badge text={isStable ? "Yes" : "No"} />
       </Box>

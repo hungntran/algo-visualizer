@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Container from "components/common/Container";
-import GradientText from "components/common/GradientText";
 import { TimeComplexity } from "components/algorithm/AlgorithmComplexity";
 import BaseLink from "components/common/BaseLink";
+import WaterIcon from "components/icons/WaterIcon";
+import CrossIcon from "components/icons/CrossIcon";
+import ArrowToLeftIcon from "components/icons/ArrowToLeftIcon";
+import MergeIcon from "components/icons/MergeIcon";
+import Badge from "components/common/Badge";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "bubble-sort",
@@ -12,23 +16,10 @@ export enum SortingAlgorithms {
   MERGE_SORT = "merge-sort",
 }
 
-const sortingDisplayTexts = {
-  [SortingAlgorithms.BUBBLE_SORT]: "Bubble sort",
-  [SortingAlgorithms.SELECTION_SORT]: "Selection sort",
-  [SortingAlgorithms.INSERTION_SORT]: "Insertion sort",
-  [SortingAlgorithms.MERGE_SORT]: "Merge sort",
-};
-
-export const titleColorMapped = {
-  [SortingAlgorithms.BUBBLE_SORT]: "from-pink-500 to-violet-500",
-  [SortingAlgorithms.SELECTION_SORT]: "from-green-500 to-violet-500",
-  [SortingAlgorithms.INSERTION_SORT]: "from-red-500 to-blue-500",
-  [SortingAlgorithms.MERGE_SORT]: "from-violet-500 to-cyan-500",
-};
-
 export const sortingAlgorithmsMapped = {
   [SortingAlgorithms.BUBBLE_SORT]: {
     name: "Bubble Sort",
+    icon: <WaterIcon />,
     worstCase: TimeComplexity.O_N2,
     averageCase: TimeComplexity.O_N2,
     bestCase: TimeComplexity.O_N,
@@ -60,6 +51,7 @@ export const sortingAlgorithmsMapped = {
   },
   [SortingAlgorithms.SELECTION_SORT]: {
     name: "Selection Sort",
+    icon: <CrossIcon />,
     worstCase: TimeComplexity.O_N2,
     averageCase: TimeComplexity.O_N2,
     bestCase: TimeComplexity.O_N2,
@@ -100,6 +92,7 @@ export const sortingAlgorithmsMapped = {
   },
   [SortingAlgorithms.INSERTION_SORT]: {
     name: "Insertion Sort",
+    icon: <ArrowToLeftIcon />,
     worstCase: TimeComplexity.O_N2,
     averageCase: TimeComplexity.O_N2,
     bestCase: TimeComplexity.O_N,
@@ -148,6 +141,7 @@ export const sortingAlgorithmsMapped = {
   },
   [SortingAlgorithms.MERGE_SORT]: {
     name: "Merge Sort",
+    icon: <MergeIcon />,
     worstCase: TimeComplexity.O_N_LOGN,
     averageCase: TimeComplexity.O_N_LOGN,
     bestCase: TimeComplexity.O_N_LOGN,
@@ -195,17 +189,19 @@ export const sortingAlgorithmsMapped = {
 const Sorting = () => {
   return (
     <Container>
-      <h1 className="text-4xl font-bold text-center my-8">Sorting</h1>
+      <h1 className="text-4xl font-bold text-center my-8 w-">Sorting</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {Object.values(SortingAlgorithms).map((item) => (
-          <Link to={`/sorting/${item}`} key={item}>
-            <div className="p-4 border-2 hover:border-primary-500 transition-colors text-xl rounded-md font-bold flex justify-center items-center">
-              <GradientText className={titleColorMapped[item]}>
-                {sortingDisplayTexts[item]}
-              </GradientText>
-            </div>
-          </Link>
-        ))}
+        {Object.values(SortingAlgorithms).map((item, index) => {
+          const { name, icon } = sortingAlgorithmsMapped[item];
+          return (
+            <Link to={`/sorting/${item}`} key={item}>
+              <div className="p-4 group border-2 hover:border-primary-500 transition-colors text-lg rounded-md font-bold flex items-center">
+                <Badge text={icon} />
+                <span className="ml-2">{name}</span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </Container>
   );
