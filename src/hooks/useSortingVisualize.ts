@@ -17,6 +17,7 @@ const algoMapped = {
   [SortingAlgorithms.SELECTION_SORT]: selectionSort,
   [SortingAlgorithms.INSERTION_SORT]: insertionSort,
   [SortingAlgorithms.MERGE_SORT]: traceMergeSort,
+  [SortingAlgorithms.QUICK_SORT]: traceMergeSort,
 };
 
 const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {
