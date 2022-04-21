@@ -3,6 +3,7 @@ export enum TraceState {
   SWAP = "SWAP",
   SORTED = "SORTED",
   INSERT = "INSERT",
+  WATCH = "WATCH",
 }
 
 export enum TraceSpeed {
@@ -50,11 +51,13 @@ class Tracer {
     onFinish,
     onInsert,
     onSorted,
+    onWatch,
   }: {
     onCompare: (payload: number[]) => void;
     onSwap: (payload: number[]) => void;
     onInsert: (payload: number[]) => void;
     onSorted: (payload: number[]) => void;
+    onWatch: (payload: number[]) => void;
     onFinish: () => void;
   }) {
     this.clearTimeouts();
@@ -71,6 +74,8 @@ class Tracer {
           onSwap(payload);
         } else if (type === TraceState.INSERT) {
           onInsert(payload);
+        } else if (type === TraceState.WATCH) {
+          onWatch(payload);
         } else if (type === TraceState.SORTED) {
           onSorted(payload);
         }

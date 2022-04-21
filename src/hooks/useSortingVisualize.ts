@@ -6,6 +6,7 @@ import selectionSort from "algorithms/sorting/selectionSort";
 import insertionSort from "algorithms/sorting/insertionSort";
 import traceMergeSort from "algorithms/sorting/mergeSort";
 import useGlobal from "./useGlobal";
+import traceQuickSort from "algorithms/sorting/quickSort";
 
 type NumberProps = {
   value: number;
@@ -17,7 +18,7 @@ const algoMapped = {
   [SortingAlgorithms.SELECTION_SORT]: selectionSort,
   [SortingAlgorithms.INSERTION_SORT]: insertionSort,
   [SortingAlgorithms.MERGE_SORT]: traceMergeSort,
-  [SortingAlgorithms.QUICK_SORT]: traceMergeSort,
+  [SortingAlgorithms.QUICK_SORT]: traceQuickSort,
 };
 
 const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {

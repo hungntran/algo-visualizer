@@ -7,7 +7,8 @@ const Bar: FC<{
   isComparing: boolean;
   isSorted: boolean;
   isSwapping: boolean;
-}> = ({ value, order, isComparing, isSorted, isSwapping }) => {
+  isWatching: boolean;
+}> = ({ value, order, isComparing, isSorted, isSwapping, isWatching }) => {
   return (
     <div
       className={classNames(
@@ -15,7 +16,8 @@ const Bar: FC<{
         {
           "bg-primary-500 border-primary-800": !isComparing && !isSorted && !isSwapping,
           "bg-custom-400 border-custom-700": isSwapping,
-          "bg-tertiary-500 border-tertiary-800": isComparing,
+          "bg-tertiary-400 border-tertiary-700": isComparing && !isWatching,
+          "bg-violet-400 border-violet-700": isWatching && !isSorted,
           "bg-secondary-400 border-secondary-700": isSorted && !isComparing && !isSwapping,
         }
       )}
