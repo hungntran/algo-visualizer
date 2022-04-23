@@ -11,12 +11,6 @@ import { TraceSpeed } from "services/Tracer";
 import { SortingAlgorithms } from "pages/Sorting";
 import useGlobal from "hooks/useGlobal";
 
-export enum SortingState {
-  COMPARE = "COMPARE",
-  SWAP = "SWAP",
-  SORTED = "SORTED",
-}
-
 type SortingVisualizerProps = {
   type: SortingAlgorithms;
 };
@@ -28,6 +22,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
   const [sourceNumbers, setSourceNumbers] = useState<number[]>(generateListUniqueNumber(listSize));
   const [comparing, setComparing] = useState<number[]>([]);
   const [swapping, setSwapping] = useState<number[]>([]);
+  const [watching, setWatching] = useState<number[]>([]);
   const [sorted, setSorted] = useState<number[]>([]);
   const [status, setStatus] = useState<VisualizerStatus>(VisualizerStatus.NONE);
   const { tracer, setNumbers, numbers, resetNumbers, swap } = useSortingVisualize(
@@ -62,6 +57,9 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
         resetActions();
         setSwapping(payload);
         setNumbers([...numbers]);
+      },
+      onWatch: (payload) => {
+        setWatching(payload);
       },
       onInsert: (payload) => {
         const source = numbers.find((num) => num.value === payload[0]);
@@ -102,6 +100,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
     resetNumbers();
     resetActions();
     setSorted([]);
+    setWatching([]);
     setStatus(VisualizerStatus.NONE);
   };
 
@@ -146,6 +145,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
               value={value}
               isSwapping={swapping.includes(value)}
               isComparing={comparing.includes(value)}
+              isWatching={watching.includes(value)}
               isSorted={sorted.includes(value)}
             />
           ))}

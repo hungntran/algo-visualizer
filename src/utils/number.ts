@@ -7,3 +7,9 @@ export const generateListUniqueNumber = (size: number, from = 2, to = 30) => {
 
   return Array.from(randomNumbers);
 };
+
+export const swap = (array: number[], i: number, j: number) => {
+  const tmp = array[i];
+  array[i] = array[j];
+  array[j] = tmp;
+};

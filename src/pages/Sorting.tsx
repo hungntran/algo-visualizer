@@ -8,12 +8,14 @@ import CrossIcon from "components/icons/CrossIcon";
 import ArrowToLeftIcon from "components/icons/ArrowToLeftIcon";
 import MergeIcon from "components/icons/MergeIcon";
 import Badge from "components/common/Badge";
+import TrendingUpIcon from "components/icons/TrendingUpIcon";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "bubble-sort",
   SELECTION_SORT = "selection-sort",
   INSERTION_SORT = "insertion-sort",
   MERGE_SORT = "merge-sort",
+  QUICK_SORT = "quick-sort",
 }
 
 export const sortingAlgorithmsMapped = {
@@ -180,6 +182,50 @@ export const sortingAlgorithmsMapped = {
             remaining. This will be the sorted list.
           </li>
         </ul>
+      </div>
+    ),
+    wiki: "https://en.wikipedia.org/wiki/Merge_sort",
+  },
+  [SortingAlgorithms.QUICK_SORT]: {
+    name: "Quick Sort",
+    icon: <TrendingUpIcon />,
+    worstCase: TimeComplexity.O_N2,
+    averageCase: TimeComplexity.O_N_LOGN,
+    bestCase: TimeComplexity.O_N_LOGN,
+    space: TimeComplexity.O_LOGN,
+    isStable: false,
+    applications: (
+      <>
+        <p>
+          The sorting algorithm is used for information searching and as Quicksort is the fastest
+          algorithm so it is widely used as a better way of searching.
+        </p>
+        <p>It is used everywhere where a stable sort is not needed.</p>
+        <p>
+          Quicksort is a cache-friendly algorithm as it has a good locality of reference when used
+          for arrays.
+        </p>
+      </>
+    ),
+    info: (
+      <div>
+        <p>
+          Like Merge Sort, Quick Sort is a Divide and Conquer algorithm. It picks an element as
+          pivot and partitions the given array around the picked pivot. There are many different
+          versions of quickSort that pick pivot in different ways.
+        </p>
+        <ol className="list-decimal list-inside mb-2">
+          <li>Always pick first element as pivot. </li>
+          <li>Always pick last element as pivot </li>
+          <li>Pick a random element as pivot. </li>
+          <li>Pick median as pivot.</li>
+        </ol>
+        <p>
+          The key process in quickSort is partition(). Target of partitions is, given an array and
+          an element x of array as pivot, put x at its correct position in sorted array and put all
+          smaller elements (smaller than x) before x, and put all greater elements (greater than x)
+          after x. All this should be done in linear time.
+        </p>
       </div>
     ),
     wiki: "https://en.wikipedia.org/wiki/Merge_sort",

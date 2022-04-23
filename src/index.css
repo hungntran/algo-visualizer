@@ -6,7 +6,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  @apply text-primary-500;
+  @apply text-primary-600;
 }
 
 p {
