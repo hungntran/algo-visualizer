@@ -1,37 +1,13 @@
 import React, { FC } from "react";
 import Box from "components/common/Box";
 import Badge from "components/common/Badge";
-
-export enum TimeComplexity {
-  O_1,
-  O_N,
-  O_N2,
-  O_LOGN,
-  O_N_LOGN,
-}
-
-const timeComplexityDisplay = {
-  [TimeComplexity.O_1]: <Badge text="O(1)" />,
-  [TimeComplexity.O_N]: <Badge text="O(n)" />,
-  [TimeComplexity.O_N2]: (
-    <Badge
-      text={
-        <span>
-          O(n<sup>2</sup>)
-        </span>
-      }
-    />
-  ),
-
-  [TimeComplexity.O_LOGN]: <Badge text="O(logn)" />,
-  [TimeComplexity.O_N_LOGN]: <Badge text="O(n logn)" />,
-};
+import ComplexityBadge, { Complexity } from "./ComplexityBadge";
 
 const AlgorithmComplexity: FC<{
-  worstCase: TimeComplexity;
-  averageCase: TimeComplexity;
-  bestCase: TimeComplexity;
-  space: TimeComplexity;
+  worstCase: Complexity;
+  averageCase: Complexity;
+  bestCase: Complexity;
+  space: Complexity;
   isStable: boolean;
 }> = ({ worstCase, averageCase, bestCase, space, isStable }) => {
   return (
@@ -40,19 +16,21 @@ const AlgorithmComplexity: FC<{
         <div className="flex flex-col gap-y-3">
           <div className="flex justify-between items-center">
             <div>Best-case</div>
-            <div>{timeComplexityDisplay[bestCase]}</div>
+            <ComplexityBadge complexity={bestCase} />
           </div>
           <div className="flex justify-between items-center">
             <div className="font-semibold">Average</div>
-            <div>{timeComplexityDisplay[averageCase]}</div>
+            <ComplexityBadge complexity={averageCase} />
           </div>
           <div className="flex justify-between items-center pb-2">
             <div>Worst-case</div>
-            <div>{timeComplexityDisplay[worstCase]}</div>
+            <ComplexityBadge complexity={worstCase} />
           </div>
         </div>
       </Box>
-      <Box title="Space complexity">{timeComplexityDisplay[space]}</Box>
+      <Box title="Space complexity">
+        <ComplexityBadge complexity={space} />
+      </Box>
       <Box title="Stable">
         <Badge text={isStable ? "Yes" : "No"} />
       </Box>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 import Container from "components/common/Container";
-import { TimeComplexity } from "components/algorithm/AlgorithmComplexity";
 import BaseLink from "components/common/BaseLink";
 import WaterIcon from "components/icons/WaterIcon";
 import CrossIcon from "components/icons/CrossIcon";
@@ -9,6 +9,8 @@ import ArrowToLeftIcon from "components/icons/ArrowToLeftIcon";
 import MergeIcon from "components/icons/MergeIcon";
 import Badge from "components/common/Badge";
 import TrendingUpIcon from "components/icons/TrendingUpIcon";
+import { Complexity } from "components/algorithm/ComplexityBadge";
+import { colorClasses } from "utils/colors";
 
 export enum SortingAlgorithms {
   BUBBLE_SORT = "bubble-sort",
@@ -22,10 +24,10 @@ export const sortingAlgorithmsMapped = {
   [SortingAlgorithms.BUBBLE_SORT]: {
     name: "Bubble Sort",
     icon: <WaterIcon />,
-    worstCase: TimeComplexity.O_N2,
-    averageCase: TimeComplexity.O_N2,
-    bestCase: TimeComplexity.O_N,
-    space: TimeComplexity.O_1,
+    worstCase: Complexity.O_N2,
+    averageCase: Complexity.O_N2,
+    bestCase: Complexity.O_N,
+    space: Complexity.O_1,
     isStable: true,
     applications: (
       <>
@@ -54,10 +56,10 @@ export const sortingAlgorithmsMapped = {
   [SortingAlgorithms.SELECTION_SORT]: {
     name: "Selection Sort",
     icon: <CrossIcon />,
-    worstCase: TimeComplexity.O_N2,
-    averageCase: TimeComplexity.O_N2,
-    bestCase: TimeComplexity.O_N2,
-    space: TimeComplexity.O_1,
+    worstCase: Complexity.O_N2,
+    averageCase: Complexity.O_N2,
+    bestCase: Complexity.O_N2,
+    space: Complexity.O_1,
     isStable: false,
     applications: (
       <>
@@ -95,10 +97,10 @@ export const sortingAlgorithmsMapped = {
   [SortingAlgorithms.INSERTION_SORT]: {
     name: "Insertion Sort",
     icon: <ArrowToLeftIcon />,
-    worstCase: TimeComplexity.O_N2,
-    averageCase: TimeComplexity.O_N2,
-    bestCase: TimeComplexity.O_N,
-    space: TimeComplexity.O_1,
+    worstCase: Complexity.O_N2,
+    averageCase: Complexity.O_N2,
+    bestCase: Complexity.O_N,
+    space: Complexity.O_1,
     isStable: true,
     applications: (
       <>
@@ -144,10 +146,10 @@ export const sortingAlgorithmsMapped = {
   [SortingAlgorithms.MERGE_SORT]: {
     name: "Merge Sort",
     icon: <MergeIcon />,
-    worstCase: TimeComplexity.O_N_LOGN,
-    averageCase: TimeComplexity.O_N_LOGN,
-    bestCase: TimeComplexity.O_N_LOGN,
-    space: TimeComplexity.O_N,
+    worstCase: Complexity.O_N_LOGN,
+    averageCase: Complexity.O_N_LOGN,
+    bestCase: Complexity.O_N_LOGN,
+    space: Complexity.O_N,
     isStable: true,
     applications: (
       <>
@@ -189,10 +191,10 @@ export const sortingAlgorithmsMapped = {
   [SortingAlgorithms.QUICK_SORT]: {
     name: "Quick Sort",
     icon: <TrendingUpIcon />,
-    worstCase: TimeComplexity.O_N2,
-    averageCase: TimeComplexity.O_N_LOGN,
-    bestCase: TimeComplexity.O_N_LOGN,
-    space: TimeComplexity.O_LOGN,
+    worstCase: Complexity.O_N2,
+    averageCase: Complexity.O_N_LOGN,
+    bestCase: Complexity.O_N_LOGN,
+    space: Complexity.O_LOGN,
     isStable: false,
     applications: (
       <>
@@ -241,9 +243,9 @@ const Sorting = () => {
           const { name, icon } = sortingAlgorithmsMapped[item];
           return (
             <Link to={`/sorting/${item}`} key={item}>
-              <div className="p-4 group border-2 hover:border-primary-500 transition-colors text-lg rounded-md font-bold flex items-center">
-                <Badge text={icon} />
-                <span className="ml-2">{name}</span>
+              <div className="p-4 group border shadow-sm hover:border-primary-400 transition-colors text-lg rounded-md font-bold flex items-center">
+                <Badge text={icon} className={classNames(colorClasses[index], "text-white p-3")} />
+                <span className="ml-4">{name}</span>
               </div>
             </Link>
           );

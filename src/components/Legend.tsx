@@ -4,7 +4,7 @@ import React from "react";
 const legendDisplayMap = [
   {
     text: "Compare",
-    color: "bg-tertiary-500 border-tertiary-800",
+    color: "bg-tertiary-400 border-tertiary-700",
   },
   {
     text: "Swap",
@@ -12,17 +12,17 @@ const legendDisplayMap = [
   },
   {
     text: "Sorted",
-    color: "bg-secondary-400 border-secondary-700",
+    color: "bg-green-300 border-green-600",
   },
 ];
 
 const Legend = () => {
   return (
-    <div className="absolute top-0 left-0 border-2 border-primary-500 rounded-tl-md rounded-br-md">
+    <div className="absolute border top-0 left-0 bg-white rounded-tl-md rounded-br-md shadow-md">
       {legendDisplayMap.map((item) => (
         <div key={item.text} className="flex gap-x-2 items-center px-2 py-1">
           <div className={classNames("w-4 h-4 border-2", item.color)}></div>
-          <div className="text-sm font-semibold">{item.text}</div>
+          <div className="text-sm">{item.text}</div>
         </div>
       ))}
     </div>

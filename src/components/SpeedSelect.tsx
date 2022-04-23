@@ -7,7 +7,7 @@ const SpeedSelect: FC<{ onSelect?: (value: TraceSpeed) => void }> = ({ onSelect 
   const { speed, setSpeed } = useGlobal();
 
   return (
-    <div className="flex flex-col absolute right-0 top-0 text-sm border-b-2 border-l-2 rounded-bl-md rounded-tr-md overflow-hidden border-primary-500">
+    <div className="flex flex-col absolute right-0 top-0 text-sm rounded-bl-md rounded-tr-md overflow-hidden shadow-md bg-white border">
       {Object.values(TraceSpeed).map((item) => (
         <button
           key={item}
@@ -15,8 +15,9 @@ const SpeedSelect: FC<{ onSelect?: (value: TraceSpeed) => void }> = ({ onSelect 
             setSpeed(item);
             onSelect && onSelect(item);
           }}
-          className={classNames("px-2 py-1 font-semibold transition-colors", {
-            "bg-primary-400 text-white": speed === item,
+          className={classNames("px-2 py-1 transition-colors cursor-pointer", {
+            "bg-primary-400 hover:bg-primary-500 text-white": speed === item,
+            "hover:bg-gray-100": speed !== item,
           })}
         >
           {traceSpeedMapped[item]}x

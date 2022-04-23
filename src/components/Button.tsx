@@ -10,15 +10,11 @@ const Button: FC<{
 }> = ({ text, onClick, isOutline, className, isDisabled }) => {
   return (
     <button
-      className={classNames(
-        className,
-        "px-5 hover:bg-primary-600 active:bg-primary-700 font-semibold rounded-md h-9",
-        {
-          "border-2 border-primary-500 hover:text-white": isOutline,
-          "bg-primary-500 text-white": !isOutline,
-          "opacity-75 cursor-not-allowed": isDisabled,
-        }
-      )}
+      className={classNames(className, "px-5 text-sm rounded-md h-8", {
+        "border text-primary-400 hover:bg-gray-100": isOutline,
+        "bg-primary-400 text-white hover:bg-primary-500 active:bg-primary-600": !isOutline,
+        "opacity-75 cursor-not-allowed": isDisabled,
+      })}
       disabled={isDisabled}
       onClick={onClick}
     >

@@ -15,7 +15,7 @@ type SortingVisualizerProps = {
   type: SortingAlgorithms;
 };
 
-const MIN_HEIGHT = 400;
+const MIN_HEIGHT = 424;
 
 const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
   const { listSize } = useGlobal();
@@ -123,7 +123,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
   return (
     <div className="relative">
       <div
-        className="w-full bg-white border-2 border-primary-500 flex justify-center items-end rounded-md"
+        className="w-full border bg-neutral-50 flex justify-center items-end rounded-md shadow-sm"
         style={{ height: MIN_HEIGHT }}
       >
         <Show when={!isRunning}>

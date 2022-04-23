@@ -1,5 +1,7 @@
 import classNames from "classnames";
 import { FC } from "react";
+import Show from "components/common/Show";
+import useGlobal from "hooks/useGlobal";
 
 const Bar: FC<{
   value: number;
@@ -9,16 +11,18 @@ const Bar: FC<{
   isSwapping: boolean;
   isWatching: boolean;
 }> = ({ value, order, isComparing, isSorted, isSwapping, isWatching }) => {
+  const { listSize } = useGlobal();
+
   return (
     <div
       className={classNames(
-        "w-6 border-2 border-b-0 text-white text-sm font-semibold text-center rounded-t-md transition-all absolute",
+        "w-6 border border-b-0 text-white text-sm text-center rounded-t-md transition-all absolute py-0.5",
         {
-          "bg-primary-500 border-primary-800": !isComparing && !isSorted && !isSwapping,
+          "bg-slate-600 border-slate-900": !isComparing && !isSorted && !isSwapping,
           "bg-custom-400 border-custom-700": isSwapping,
           "bg-tertiary-400 border-tertiary-700": isComparing && !isWatching,
           "bg-violet-400 border-violet-700": isWatching && !isSorted,
-          "bg-secondary-400 border-secondary-700": isSorted && !isComparing && !isSwapping,
+          "bg-green-300 border-green-600": isSorted && !isComparing && !isSwapping,
         }
       )}
       style={{
@@ -27,6 +31,13 @@ const Bar: FC<{
       }}
     >
       {value}
+
+      <Show when={isWatching && !isSorted && !isSwapping}>
+        <div
+          className="border border-violet-400 absolute -top-0.5 z-10"
+          style={{ width: listSize * (30 + 1), left: -30 * order }}
+        ></div>
+      </Show>
     </div>
   );
 };

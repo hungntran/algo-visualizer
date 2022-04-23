@@ -18,13 +18,13 @@ const Header = () => {
     <div>
       <Container>
         <div className="flex justify-between flex-wrap">
-          <div className="flex items-center gap-x-8 py-4 font-bold">
-            <Link to="/">Algo Visualizer</Link>
+          <div className="flex items-center gap-x-8 py-4 font-semibold">
+            <Link to="/">AlgoVisual</Link>
             {navigators.map(({ path, text }) => (
               <div
                 key={text}
                 className={classNames("flex items-center px-3 py-1 rounded-md transition-all", {
-                  "ring-2 ring-primary-500": location.pathname.includes(path),
+                  "bg-gray-100": location.pathname.includes(path),
                 })}
               >
                 <Link to={path}>{text}</Link>

@@ -11,15 +11,16 @@ const SizeSelect: FC<{
 
   return (
     <div
-      className="absolute top-0 left-1/2 flex border-x-2 border-b-2 border-primary-500 rounded-b-md z-10"
+      className="absolute top-0 left-1/2 flex bg-white border rounded-b-md shadow-md z-10"
       style={{ transform: "translateX(-50%)" }}
     >
       {buttons.map((item) => {
         return (
           <button
             key={item}
-            className={classNames("px-2 py-0.5 text-sm w-9 transition-colors font-semibold", {
-              "bg-primary-400 text-white": listSize === item,
+            className={classNames("px-2 py-0.5 text-sm w-9 transition-colors", {
+              "bg-primary-400 hover:bg-primary-500 text-white": listSize === item,
+              "hover:bg-gray-100": listSize !== item,
             })}
             onClick={() => {
               setListSize(item);

@@ -45,21 +45,18 @@ const SortingDetail = () => {
           />
         </div>
 
-        <div className="col-span-3 mb-4 desktop:mb-0">
-          <Box title="Description">
-            {info}
-            <div className="text-right mt-2">
-              <BaseLink href={wiki}>Wikipedia</BaseLink>
-            </div>
-          </Box>
-        </div>
-
-        <div className="col-span-1">
+        {/* <div className="col-span-1">
           <Box title="Applications">
             <div>{applications}</div>
           </Box>
-        </div>
+        </div> */}
       </div>
+      <Box title="Description">
+        {info}
+        <div className="text-right mt-2">
+          <BaseLink href={wiki}>Wikipedia</BaseLink>
+        </div>
+      </Box>
     </Container>
   );
 };
