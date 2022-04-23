@@ -14,7 +14,7 @@ const SortingDetail = () => {
     return <Navigate to="/sorting" />;
   }
 
-  const { name, worstCase, averageCase, bestCase, space, info, isStable, applications, wiki } =
+  const { name, worstCase, averageCase, bestCase, space, info, isStable, wiki } =
     sortingAlgorithmsMapped[type];
 
   return (
