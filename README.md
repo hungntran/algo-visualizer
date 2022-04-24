@@ -6,8 +6,8 @@ A minimal tool to visualize algorithms built with React.
 
 The purpose of this project:
 
--  Practice my front-end skills
--  Improve my knowledge of algorithms.
+- Practice React & Typescript.
+- Improve my knowledge of algorithms.
 
 ### Todo
 
@@ -16,7 +16,6 @@ The purpose of this project:
 - [ ] Go back and go forward
 - [ ] Code view
 - [ ] Dark mode
-
 
 ### Built With
 
@@ -65,3 +64,8 @@ Don't forget to give the project a star! Thanks again!
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+## Credit
+
+- [Streamline](https://www.streamlinehq.com/)
+- [Flaticon](https://www.flaticon.com/)
