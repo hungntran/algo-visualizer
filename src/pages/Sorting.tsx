@@ -237,13 +237,13 @@ export const sortingAlgorithmsMapped = {
 const Sorting = () => {
   return (
     <Container>
-      <h1 className="text-4xl font-bold text-center my-8 w-">Sorting</h1>
+      <h1 className="text-4xl font-semibold text-center my-8">Sorting</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {Object.values(SortingAlgorithms).map((item, index) => {
           const { name, icon } = sortingAlgorithmsMapped[item];
           return (
             <Link to={`/sorting/${item}`} key={item}>
-              <div className="p-4 group border shadow-sm hover:border-primary-400 transition-colors text-lg rounded-md font-bold flex items-center">
+              <div className="p-4 border shadow-sm hover:border-primary-400 transition-colors text-lg rounded-md flex items-center">
                 <Badge text={icon} className={classNames(colorClasses[index], "text-white p-3")} />
                 <span className="ml-4">{name}</span>
               </div>

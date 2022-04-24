@@ -3,6 +3,8 @@ import { FC } from "react";
 import Show from "components/common/Show";
 import useGlobal from "hooks/useGlobal";
 
+const TOTAL_WIDTH = 30;
+
 const Bar: FC<{
   value: number;
   order: number;
@@ -26,7 +28,7 @@ const Bar: FC<{
         }
       )}
       style={{
-        left: 30 * order,
+        left: TOTAL_WIDTH * order,
         height: value * 10,
       }}
     >
@@ -35,7 +37,7 @@ const Bar: FC<{
       <Show when={isWatching && !isSorted && !isSwapping}>
         <div
           className="border border-violet-400 absolute -top-0.5 z-10"
-          style={{ width: listSize * (30 + 1), left: -30 * order }}
+          style={{ width: (listSize + 1) * TOTAL_WIDTH, left: -TOTAL_WIDTH * order }}
         ></div>
       </Show>
     </div>

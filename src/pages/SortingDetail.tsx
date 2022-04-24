@@ -21,9 +21,9 @@ const SortingDetail = () => {
     <Container>
       <div className="desktop:grid desktop:grid-cols-4">
         <div className="relative col-span-3">
-          <h1 className="text-4xl font-bold text-center my-7">{name}</h1>
+          <h1 className="text-4xl font-semibold text-center my-7">{name}</h1>
           <Link to="/sorting">
-            <div className="absolute top-1/2 -translate-y-1/2 left-0 font-semibold cursor-pointer px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-md">
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 cursor-pointer px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-md">
               Back
             </div>
           </Link>

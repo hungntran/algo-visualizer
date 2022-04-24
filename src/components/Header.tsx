@@ -1,35 +1,21 @@
 import React from "react";
-import classNames from "classnames";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Container from "./common/Container";
 import BaseLink from "./common/BaseLink";
-
-const navigators = [
-  {
-    path: "/sorting",
-    text: "Sorting",
-  },
-];
+import Logo from "assets/images/logo.png";
 
 const Header = () => {
-  const location = useLocation();
-
   return (
     <div>
       <Container>
         <div className="flex justify-between flex-wrap">
           <div className="flex items-center gap-x-8 py-4 font-semibold">
-            <Link to="/">AlgoVisual</Link>
-            {navigators.map(({ path, text }) => (
-              <div
-                key={text}
-                className={classNames("flex items-center px-3 py-1 rounded-md transition-all", {
-                  "bg-gray-100": location.pathname.includes(path),
-                })}
-              >
-                <Link to={path}>{text}</Link>
+            <Link to="/" className="hover:text-primary-400">
+              <div className="flex items-center">
+                <img src={Logo} alt="logo" width={32} />
+                <span className="ml-2">AlgoVisual</span>
               </div>
-            ))}
+            </Link>
           </div>
           <div className="flex items-center gap-x-1">
             Made with ❤️ by{" "}
