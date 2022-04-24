@@ -9,7 +9,7 @@ const Home = () => {
       <div className="text-center mb-8">
         <h1 className="text-3xl mt-8 mb-4 font-semibold">
           <span className="text-secondary-500">Simple</span> and&nbsp;
-          <span className="text-primary-500">modern</span>&nbsp; Algorithms Visualizer
+          <span className="text-primary-500">modern</span>
         </h1>
         <p>Visualizing data structures and algorithms through animation</p>
         <input

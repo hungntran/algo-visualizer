@@ -1,13 +1,6 @@
 import classNames from "classnames";
 import React, { FC } from "react";
-
-export enum Complexity {
-  O_1,
-  O_N,
-  O_N2,
-  O_LOGN,
-  O_N_LOGN,
-}
+import { Complexity } from "services/Api";
 
 const complexityColorMap = {
   [Complexity.O_1]: "bg-emerald-50",

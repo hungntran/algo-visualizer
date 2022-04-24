@@ -12,10 +12,10 @@ import { SortingAlgorithms } from "pages/Sorting";
 import useGlobal from "hooks/useGlobal";
 
 type SortingVisualizerProps = {
-  type: SortingAlgorithms;
+  type: SortingAlgorithms | string;
 };
 
-const MIN_HEIGHT = 424;
+const MIN_HEIGHT = 472;
 
 const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
   const { listSize } = useGlobal();
