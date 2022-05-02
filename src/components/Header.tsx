@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Container from "./common/Container";
 import BaseLink from "./common/BaseLink";
-import Logo from "assets/images/logo.png";
 
 const Header = () => {
   return (
@@ -12,8 +11,7 @@ const Header = () => {
           <div className="flex items-center gap-x-8 py-4 font-semibold">
             <Link to="/" className="hover:text-primary-400">
               <div className="flex items-center">
-                <img src={Logo} alt="logo" width={32} />
-                <span className="ml-2">AlgoVisual</span>
+                <span className="text-lg">AlgoVisual</span>
               </div>
             </Link>
           </div>

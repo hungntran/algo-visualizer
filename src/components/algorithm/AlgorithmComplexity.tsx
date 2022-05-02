@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import Box from "components/common/Box";
 import Badge from "components/common/Badge";
-import ComplexityBadge, { Complexity } from "./ComplexityBadge";
+import ComplexityBadge from "./ComplexityBadge";
+import { Complexity } from "services/Api";
 
 const AlgorithmComplexity: FC<{
   worstCase: Complexity;

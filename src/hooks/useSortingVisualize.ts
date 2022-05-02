@@ -13,7 +13,7 @@ type NumberProps = {
   order: number;
 };
 
-const algoMapped = {
+const algoMapped: { [key: SortingAlgorithms | string]: (numbers: number[]) => Tracer } = {
   [SortingAlgorithms.BUBBLE_SORT]: bubbleSort,
   [SortingAlgorithms.SELECTION_SORT]: selectionSort,
   [SortingAlgorithms.INSERTION_SORT]: insertionSort,
@@ -21,12 +21,16 @@ const algoMapped = {
   [SortingAlgorithms.QUICK_SORT]: traceQuickSort,
 };
 
-const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms) => {
+const useSortingVisualize = (sourceNumbers: number[], type: SortingAlgorithms | string) => {
   const { speed } = useGlobal();
   const [tracer, setTracer] = useState<Tracer>();
   const [numbers, setNumbers] = useState<NumberProps[]>([]);
 
   useEffect(() => {
+    if (algoMapped[type] == null) {
+      return;
+    }
+
     setNumbers(
       sourceNumbers.map((num, index) => ({
         value: num,

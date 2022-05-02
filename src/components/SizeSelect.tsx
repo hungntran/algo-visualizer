@@ -11,7 +11,7 @@ const SizeSelect: FC<{
 
   return (
     <div
-      className="absolute top-0 left-1/2 flex bg-white border rounded-b-md shadow-md z-10"
+      className="absolute top-0 left-1/2 flex bg-white border rounded-b-md shadow-md z-10 overflow-hidden"
       style={{ transform: "translateX(-50%)" }}
     >
       {buttons.map((item) => {

@@ -2,11 +2,6 @@ module.exports = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
-      screens: {
-        tablet: "640px",
-        laptop: "1024px",
-        desktop: "1280px",
-      },
       colors: {
         primary: {
           50: "#EEEBFD",
@@ -67,5 +62,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

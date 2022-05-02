@@ -1,21 +1,5 @@
-import classNames from "classnames";
 import React, { FC } from "react";
-
-export enum Complexity {
-  O_1,
-  O_N,
-  O_N2,
-  O_LOGN,
-  O_N_LOGN,
-}
-
-const complexityColorMap = {
-  [Complexity.O_1]: "bg-emerald-50",
-  [Complexity.O_LOGN]: "bg-green-50",
-  [Complexity.O_N]: "bg-green-50",
-  [Complexity.O_N_LOGN]: "bg-orange-50",
-  [Complexity.O_N2]: "bg-rose-50",
-};
+import { Complexity } from "services/Api";
 
 const complexityDisplayMap = {
   [Complexity.O_1]: "O(1)",
@@ -31,7 +15,7 @@ const complexityDisplayMap = {
 
 const ComplexityBadge: FC<{ complexity: Complexity }> = ({ complexity }) => {
   return (
-    <span className={classNames("px-3 py-1 rounded-md text-sm", complexityColorMap[complexity])}>
+    <span className="px-2 py-0.5 rounded-md text-sm border bg-gray-50 text-gray-600">
       {complexityDisplayMap[complexity]}
     </span>
   );

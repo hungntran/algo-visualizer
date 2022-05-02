@@ -9,7 +9,7 @@ const Home = () => {
       <div className="text-center mb-8">
         <h1 className="text-3xl mt-8 mb-4 font-semibold">
           <span className="text-secondary-500">Simple</span> and&nbsp;
-          <span className="text-primary-500">modern</span>&nbsp; Algorithms Visualizer
+          <span className="text-primary-500">modern</span>
         </h1>
         <p>Visualizing data structures and algorithms through animation</p>
         <input
@@ -20,7 +20,7 @@ const Home = () => {
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <Link to="/sorting">
-          <div className="p-4 border shadow-sm hover:border-primary-400 transition-colors text-lg rounded-md flex flex-col items-center justify-center">
+          <div className="p-4 border shadow-sm hover:border-secondary-400 transition-colors text-lg rounded-md flex flex-col items-center justify-center">
             <p>Sorting</p>
             <img src={SortingImage} alt="sorting" />
           </div>

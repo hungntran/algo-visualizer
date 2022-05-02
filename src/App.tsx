@@ -4,6 +4,7 @@ import Sorting from "pages/Sorting";
 import Home from "pages/Home";
 import SortingDetail from "pages/SortingDetail";
 import Header from "components/Header";
+import Error from "pages/Error";
 
 function App() {
   return (
@@ -11,10 +12,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="sorting">
-          <Route index element={<Sorting />}></Route>
-          <Route path=":type" element={<SortingDetail />}></Route>
-        </Route>
+        <Route path="sorting" element={<Sorting />}></Route>
+        <Route path="sorting/:type" element={<SortingDetail />}></Route>
+        <Route path="error" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
