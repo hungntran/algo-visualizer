@@ -50,7 +50,7 @@ const Sorting = () => {
           const { name, icon } = sortingAlgorithmsMapped[item];
           return (
             <Link to={`/sorting/${item}`} key={item}>
-              <div className="p-4 border shadow-sm hover:border-primary-400 transition-colors text-base rounded-md flex items-center">
+              <div className="p-4 border shadow-sm hover:border-secondary-400 transition-colors text-base rounded-md flex items-center">
                 <Badge text={icon} className={classNames(colorClasses[index], "text-white p-3")} />
                 <span className="ml-4">{name}</span>
               </div>

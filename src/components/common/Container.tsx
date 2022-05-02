@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-const MAX_WIDTH = 1280;
+const MAX_WIDTH = 1080;
 
 const Container: FC = ({ children }) => {
   return (
