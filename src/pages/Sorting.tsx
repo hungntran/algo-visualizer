@@ -8,6 +8,7 @@ import ArrowToLeftIcon from "components/icons/ArrowToLeftIcon";
 import MergeIcon from "components/icons/MergeIcon";
 import Badge from "components/common/Badge";
 import TrendingUpIcon from "components/icons/TrendingUpIcon";
+import Heading from "components/Heading";
 import { colorClasses } from "utils/colors";
 
 export enum SortingAlgorithms {
@@ -44,7 +45,7 @@ export const sortingAlgorithmsMapped = {
 const Sorting = () => {
   return (
     <Container>
-      <h1 className="text-3xl font-semibold text-center my-8">Sorting</h1>
+      <Heading text="Sorting" backLink="/" />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {Object.values(SortingAlgorithms).map((item, index) => {
           const { name, icon } = sortingAlgorithmsMapped[item];

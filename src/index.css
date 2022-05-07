@@ -6,8 +6,8 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  @apply text-gray-700 bg-slate-50 text-[15px];
-  @apply dark:bg-slate-800 dark:text-slate-300;
+  @apply text-gray-700 bg-white text-[15px];
+  @apply dark:bg-neutral-800 dark:text-slate-300;
 }
 
 p {

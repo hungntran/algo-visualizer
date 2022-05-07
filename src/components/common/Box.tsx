@@ -6,7 +6,7 @@ const Box: FC<{ title?: string; className?: string }> = ({ children, title, clas
   return (
     <div
       className={classNames(
-        "p-4 border dark:hover:border-secondary-400 dark:border-gray-500 hover:border-secondary-400 bg-white dark:bg-slate-800 transition-colors shadow-sm rounded-md",
+        "p-4 border dark:hover:border-secondary-400 dark:border-gray-500 hover:border-secondary-400 transition-colors shadow-sm rounded-md",
         className
       )}
     >

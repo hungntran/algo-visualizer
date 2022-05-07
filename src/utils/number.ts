@@ -1,4 +1,4 @@
-export const generateListUniqueNumber = (size: number, from = 2, to = 30) => {
+export const generateListUniqueNumber = (size: number, from = 3, to = 30) => {
   const randomNumbers = new Set<number>();
 
   while (randomNumbers.size <= size) {

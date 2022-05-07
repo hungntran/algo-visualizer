@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SortingVisualizer from "components/SortingVisualizer";
 import Container from "components/common/Container";
 import Box from "components/common/Box";
 import AlgorithmComplexity from "components/algorithm/AlgorithmComplexity";
 import Api, { AlgorithmResponse } from "services/Api";
 import LoadingScreen from "components/LoadingScreen";
-import ArrowBackIcon from "components/icons/ArrowBackIcon";
+import Heading from "components/Heading";
 
 const SortingDetail = () => {
   const { type } = useParams();
@@ -33,7 +33,12 @@ const SortingDetail = () => {
   }, [type]);
 
   if (algorithm == null || loading) {
-    return <LoadingScreen minHeight={400} />;
+    return (
+      <Container>
+        <Heading text="Loading..." backLink="/sorting" />
+        <LoadingScreen minHeight={500} />
+      </Container>
+    );
   }
 
   const { name, worstCase, averageCase, bestCase, spaceComplexity, stable, slug, description } =
@@ -41,15 +46,7 @@ const SortingDetail = () => {
 
   return (
     <Container>
-      <div className="relative">
-        <h1 className="text-3xl font-semibold text-center my-7">{name}</h1>
-        <Link to="/sorting">
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 cursor-pointer p-1.5 dark:hover:bg-gray-600 hover:bg-gray-100 rounded-md">
-            <ArrowBackIcon />
-          </div>
-        </Link>
-      </div>
-
+      <Heading text={name} backLink="/sorting" />
       <SortingVisualizer type={slug} />
       <div className="lg:grid lg:grid-cols-4 gap-x-4">
         <div className="col-span-1">
