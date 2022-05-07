@@ -43,27 +43,29 @@ const SortingDetail = () => {
       <div className="relative">
         <h1 className="text-3xl font-semibold text-center my-7">{name}</h1>
         <Link to="/sorting">
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 cursor-pointer px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-md">
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 cursor-pointer px-3 py-1 bg-gray-100 dark:bg-gray-600 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-md">
             Back
           </div>
         </Link>
       </div>
 
       <SortingVisualizer type={slug} />
-      <div className="lg:grid lg:grid-cols-4 gap-x-4 mb-4">
+      <div className="lg:grid lg:grid-cols-4 gap-x-4">
         <div className="col-span-1">
-          <AlgorithmComplexity
-            worstCase={worstCase}
-            averageCase={averageCase}
-            bestCase={bestCase}
-            space={spaceComplexity}
-            isStable={stable}
-          />
+          <div className="lg:sticky lg:top-4">
+            <AlgorithmComplexity
+              worstCase={worstCase}
+              averageCase={averageCase}
+              bestCase={bestCase}
+              space={spaceComplexity}
+              isStable={stable}
+            />
+          </div>
         </div>
         <div className="col-span-3">
           <Box>
             <article
-              className="prose prose-sm prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline prose-h1:font-semibold max-w-none"
+              className="prose dark:prose-invert prose-sm px-2 prose-a:text-primary-400 prose-a:no-underline hover:prose-a:underline prose-h1:font-semibold prose-code:text-xs max-w-none"
               dangerouslySetInnerHTML={{ __html: description.html }}
             ></article>
           </Box>

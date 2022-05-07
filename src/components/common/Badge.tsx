@@ -8,7 +8,7 @@ const Badge: FC<{
   return (
     <div
       className={classNames(
-        "inline-block items-center justify-center rounded-md px-2 py-0.5 text-center",
+        "inline-block items-center justify-center rounded-md px-2 py-1 text-sm text-center",
         className
       )}
     >

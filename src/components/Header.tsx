@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Container from "./common/Container";
 import BaseLink from "./common/BaseLink";
+import ToggleDarkMode from "./ToggleDarkMode";
 
 const Header = () => {
   return (
@@ -20,6 +21,9 @@ const Header = () => {
             <BaseLink href="https://github.com/hungdotjs" className="font-semibold">
               hungdotjs
             </BaseLink>
+          </div>
+          <div className="flex items-center">
+            <ToggleDarkMode />
           </div>
         </div>
       </Container>

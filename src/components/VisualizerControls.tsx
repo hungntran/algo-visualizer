@@ -52,7 +52,7 @@ const VisualizerControls: FC<VisualizerControlsProps> = ({
           />
         </Show>
         <Show when={!isRunning}>
-          <Button text="Reset" onClick={onReset} isOutline />
+          <Button text="Reset" onClick={onReset} isSecondary />
         </Show>
       </div>
     </div>

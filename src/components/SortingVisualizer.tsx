@@ -123,7 +123,7 @@ const SortingVisualizer: FC<SortingVisualizerProps> = ({ type }) => {
   return (
     <div className="relative overflow-hidden">
       <div
-        className="w-full border bg-neutral-50 flex justify-center items-end rounded-md shadow-sm"
+        className="w-full bg-slate-200 dark:bg-slate-500 flex justify-center transition-colors items-end rounded-md shadow-sm"
         style={{ height: MIN_HEIGHT }}
       >
         <Show when={!isRunning}>

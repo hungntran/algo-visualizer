@@ -20,7 +20,7 @@ const Home = () => {
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <Link to="/sorting">
-          <div className="p-4 border shadow-sm hover:border-secondary-400 transition-colors text-lg rounded-md flex flex-col items-center justify-center">
+          <div className="p-4 hover:ring hover:ring-secondary-400 hover:-translate-y-3 transition-all duration-300 text-lg rounded-md flex flex-col items-center justify-center">
             <p>Sorting</p>
             <img src={SortingImage} alt="sorting" />
           </div>

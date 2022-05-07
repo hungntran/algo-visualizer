@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React, { FC } from "react";
 import { Complexity } from "services/Api";
 
@@ -13,9 +14,17 @@ const complexityDisplayMap = {
   ),
 };
 
+const complexityColorMap = {
+  [Complexity.O_1]: "bg-green-50 text-green-600",
+  [Complexity.O_LOGN]: "bg-green-50 text-green-600",
+  [Complexity.O_N]: "bg-green-50 text-green-600",
+  [Complexity.O_N_LOGN]: "bg-orange-50 text-orange-600",
+  [Complexity.O_N2]: "bg-red-50 text-red-600",
+};
+
 const ComplexityBadge: FC<{ complexity: Complexity }> = ({ complexity }) => {
   return (
-    <span className="px-2 py-0.5 rounded-md text-sm border bg-gray-50 text-gray-600">
+    <span className={classNames("px-2 py-0.5 rounded-md text-sm", complexityColorMap[complexity])}>
       {complexityDisplayMap[complexity]}
     </span>
   );

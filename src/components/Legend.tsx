@@ -18,7 +18,7 @@ const legendDisplayMap = [
 
 const Legend = () => {
   return (
-    <div className="absolute invisible md:visible border top-0 left-0 bg-white rounded-tl-md rounded-br-md shadow-md">
+    <div className="absolute invisible md:visible top-0 left-0 bg-white dark:bg-gray-700 rounded-tl-md rounded-br-md shadow-md p-0.5">
       {legendDisplayMap.map((item) => (
         <div key={item.text} className="flex gap-x-2 items-center px-2 py-1">
           <div className={classNames("w-4 h-4 border-2", item.color)}></div>

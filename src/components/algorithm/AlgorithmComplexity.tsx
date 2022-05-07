@@ -3,6 +3,7 @@ import Box from "components/common/Box";
 import Badge from "components/common/Badge";
 import ComplexityBadge from "./ComplexityBadge";
 import { Complexity } from "services/Api";
+import classNames from "classnames";
 
 const AlgorithmComplexity: FC<{
   worstCase: Complexity;
@@ -23,7 +24,7 @@ const AlgorithmComplexity: FC<{
             <div className="font-semibold">Average</div>
             <ComplexityBadge complexity={averageCase} />
           </div>
-          <div className="flex justify-between items-center pb-2">
+          <div className="flex justify-between items-center">
             <div>Worst-case</div>
             <ComplexityBadge complexity={worstCase} />
           </div>
@@ -33,7 +34,12 @@ const AlgorithmComplexity: FC<{
         <ComplexityBadge complexity={space} />
       </Box>
       <Box title="Stable">
-        <Badge text={isStable ? "Yes" : "No"} />
+        <Badge
+          text={isStable ? "Yes" : "No"}
+          className={classNames(
+            isStable ? "bg-green-50  text-green-600" : "bg-red-50 text-red-600"
+          )}
+        />
       </Box>
     </div>
   );

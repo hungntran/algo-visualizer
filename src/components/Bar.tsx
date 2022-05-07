@@ -18,13 +18,13 @@ const Bar: FC<{
   return (
     <div
       className={classNames(
-        "w-6 border border-b-0 text-white text-sm text-center rounded-t-md transition-all absolute py-0.5",
+        "w-6 border border-b-0 font-semibold text-sm text-center rounded-t-md transition-all absolute py-0.5",
         {
-          "bg-slate-600 border-slate-900": !isComparing && !isSorted && !isSwapping,
-          "bg-custom-400 border-custom-700": isSwapping,
-          "bg-tertiary-400 border-tertiary-700": isComparing && !isWatching,
-          "bg-violet-400 border-violet-700": isWatching && !isSorted,
-          "bg-green-300 border-green-600": isSorted && !isComparing && !isSwapping,
+          "bg-slate-700 text-white border-slate-900": !isComparing && !isSorted && !isSwapping,
+          "bg-custom-300 text-black  border-custom-700": isSwapping,
+          "bg-tertiary-300 text-black  border-tertiary-700": isComparing && !isWatching,
+          "bg-violet-300 text-black  border-violet-700": isWatching && !isSorted,
+          "bg-green-300 text-black  border-green-700": isSorted && !isComparing && !isSwapping,
         }
       )}
       style={{

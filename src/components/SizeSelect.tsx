@@ -11,7 +11,7 @@ const SizeSelect: FC<{
 
   return (
     <div
-      className="absolute top-0 left-1/2 flex bg-white border rounded-b-md shadow-md z-10 overflow-hidden"
+      className="absolute top-0 left-1/2 flex bg-white dark:bg-gray-700 rounded-b-md shadow-md z-10 overflow-hidden"
       style={{ transform: "translateX(-50%)" }}
     >
       {buttons.map((item) => {
@@ -20,7 +20,7 @@ const SizeSelect: FC<{
             key={item}
             className={classNames("px-2 py-0.5 text-sm w-9 transition-colors", {
               "bg-primary-400 hover:bg-primary-500 text-white": listSize === item,
-              "hover:bg-gray-100": listSize !== item,
+              "hover:bg-gray-100 dark:hover:bg-gray-800": listSize !== item,
             })}
             onClick={() => {
               setListSize(item);
