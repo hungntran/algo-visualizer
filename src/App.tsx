@@ -4,6 +4,7 @@ import Sorting from "pages/Sorting";
 import Home from "pages/Home";
 import SortingDetail from "pages/SortingDetail";
 import Header from "components/Header";
+import Footer from "components/Footer";
 import Error from "pages/Error";
 import useGlobal from "hooks/useGlobal";
 
@@ -28,6 +29,7 @@ function App() {
           <Route path="sorting/:type" element={<SortingDetail />}></Route>
           <Route path="error" element={<Error />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );

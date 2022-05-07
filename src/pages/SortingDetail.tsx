@@ -6,6 +6,7 @@ import Box from "components/common/Box";
 import AlgorithmComplexity from "components/algorithm/AlgorithmComplexity";
 import Api, { AlgorithmResponse } from "services/Api";
 import LoadingScreen from "components/LoadingScreen";
+import ArrowBackIcon from "components/icons/ArrowBackIcon";
 
 const SortingDetail = () => {
   const { type } = useParams();
@@ -43,8 +44,8 @@ const SortingDetail = () => {
       <div className="relative">
         <h1 className="text-3xl font-semibold text-center my-7">{name}</h1>
         <Link to="/sorting">
-          <div className="absolute top-1/2 -translate-y-1/2 left-0 cursor-pointer px-3 py-1 bg-gray-100 dark:bg-gray-600 dark:hover:bg-gray-700 hover:bg-gray-200 rounded-md">
-            Back
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 cursor-pointer p-1.5 dark:hover:bg-gray-600 hover:bg-gray-100 rounded-md">
+            <ArrowBackIcon />
           </div>
         </Link>
       </div>

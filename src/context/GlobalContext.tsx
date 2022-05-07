@@ -12,7 +12,7 @@ type GlobalContextType = {
 
 export const GlobalContext = createContext<GlobalContextType | undefined>(undefined);
 
-const DEFAULT_SIZE = 15;
+const DEFAULT_SIZE = 10;
 
 const GlobalContextProvider: FC = ({ children }) => {
   const [listSize, setListSize] = useState(DEFAULT_SIZE);

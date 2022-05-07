@@ -12,7 +12,7 @@ const ToggleDarkMode = () => {
 
   return (
     <div
-      className="p-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-700 transition-colors rounded-md cursor-pointer"
+      className="p-1.5 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors rounded-md cursor-pointer"
       onClick={toggleDarkMode}
     >
       {darkMode ? <MoonIcon /> : <SunIcon />}
